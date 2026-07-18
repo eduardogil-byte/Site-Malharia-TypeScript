@@ -270,6 +270,7 @@ export type Database = {
     }
     Functions: {
       health_check: { Args: never; Returns: string }
+      usuario_atual_e_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
