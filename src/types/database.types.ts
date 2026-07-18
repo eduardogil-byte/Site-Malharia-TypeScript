@@ -12,34 +12,258 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
-      [_ in never]: never
+      categorias: {
+        Row: {
+          ativa: boolean
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          posicao: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          ativa?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          posicao: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          ativa?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          posicao?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      configuracoes_site: {
+        Row: {
+          created_at: string
+          descricao_marca: string | null
+          endereco: string | null
+          hero_image_path: string | null
+          hero_subtitulo: string | null
+          hero_titulo: string | null
+          id: number
+          instagram_url: string | null
+          logo_image_path: string | null
+          nome_marca: string
+          texto_sobre: string | null
+          updated_at: string
+          updated_by: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          created_at?: string
+          descricao_marca?: string | null
+          endereco?: string | null
+          hero_image_path?: string | null
+          hero_subtitulo?: string | null
+          hero_titulo?: string | null
+          id?: number
+          instagram_url?: string | null
+          logo_image_path?: string | null
+          nome_marca: string
+          texto_sobre?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          created_at?: string
+          descricao_marca?: string | null
+          endereco?: string | null
+          hero_image_path?: string | null
+          hero_subtitulo?: string | null
+          hero_titulo?: string | null
+          id?: number
+          instagram_url?: string | null
+          logo_image_path?: string | null
+          nome_marca?: string
+          texto_sobre?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      home_secao_produtos: {
+        Row: {
+          created_at: string
+          posicao: number
+          produto_id: string
+          secao_id: string
+        }
+        Insert: {
+          created_at?: string
+          posicao: number
+          produto_id: string
+          secao_id: string
+        }
+        Update: {
+          created_at?: string
+          posicao?: number
+          produto_id?: string
+          secao_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "home_secao_produtos_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: false
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "home_secao_produtos_secao_id_fkey"
+            columns: ["secao_id"]
+            isOneToOne: false
+            referencedRelation: "secoes_home"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      produto_imagens: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          id: string
+          posicao: number
+          produto_id: string
+          storage_path: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          posicao: number
+          produto_id: string
+          storage_path: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          posicao?: number
+          produto_id?: string
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produto_imagens_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: false
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      produtos: {
+        Row: {
+          atributos: Json
+          categoria_id: string
+          created_at: string
+          created_by: string | null
+          descricao: string | null
+          descricao_curta: string | null
+          disponivel: boolean
+          id: string
+          mensagem_whatsapp: string | null
+          nome: string
+          slug: string
+          status: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          atributos?: Json
+          categoria_id: string
+          created_at?: string
+          created_by?: string | null
+          descricao?: string | null
+          descricao_curta?: string | null
+          disponivel?: boolean
+          id?: string
+          mensagem_whatsapp?: string | null
+          nome: string
+          slug: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          atributos?: Json
+          categoria_id?: string
+          created_at?: string
+          created_by?: string | null
+          descricao?: string | null
+          descricao_curta?: string | null
+          disponivel?: boolean
+          id?: string
+          mensagem_whatsapp?: string | null
+          nome?: string
+          slug?: string
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produtos_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "categorias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      secoes_home: {
+        Row: {
+          ativa: boolean
+          created_at: string
+          id: string
+          limite_produtos: number
+          posicao: number
+          slug: string
+          subtitulo: string | null
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativa?: boolean
+          created_at?: string
+          id?: string
+          limite_produtos?: number
+          posicao: number
+          slug: string
+          subtitulo?: string | null
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativa?: boolean
+          created_at?: string
+          id?: string
+          limite_produtos?: number
+          posicao?: number
+          slug?: string
+          subtitulo?: string | null
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -174,9 +398,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {},
   },

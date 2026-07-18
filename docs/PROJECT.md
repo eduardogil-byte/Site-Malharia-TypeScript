@@ -64,4 +64,24 @@ O site não realizará vendas diretamente. Cada produto terá um botão que dire
 
 ## Etapa atual
 
-Configuração do Git, documentação e estrutura inicial do frontend.
+Estrutura principal do banco criada.
+
+## Tabelas públicas
+
+- categorias
+- produtos
+- produto_imagens
+- secoes_home
+- home_secao_produtos
+- configuracoes_site
+
+## Tabelas privadas
+
+- administradores
+- logs_auditoria
+
+## Segurança atual
+
+- RLS ativado em todas as tabelas públicas
+- Nenhuma política pública criada
+- Nenhum CRUD liberado
