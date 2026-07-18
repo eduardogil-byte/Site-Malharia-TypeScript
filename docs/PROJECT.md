@@ -62,6 +62,22 @@ O site não realizará vendas diretamente. Cada produto terá um botão que dire
 - administradores
 - logs_auditoria
 
+## Segurança do banco
+
+- RLS habilitado em todas as tabelas públicas.
+- Visitantes podem consultar somente conteúdo publicado.
+- Usuários autenticados comuns não podem modificar dados.
+- Administradores são armazenados em private.administradores.
+- A verificação administrativa é realizada por função security definer.
+- O schema private não está exposto pela Data API.
+- Cadastros públicos do Supabase Auth estão desativados.
+- created_by e updated_by não são controlados pelo frontend.
+
+## Primeiro administrador
+
+O administrador inicial é criado no Supabase Auth e vinculado
+manualmente à tabela private.administradores.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
