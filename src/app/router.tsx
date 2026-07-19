@@ -10,6 +10,7 @@ import { HomePage } from "../pages/public/HomePage";
 import { ProductPage } from "../pages/public/ProductPage";
 import { AdminLayout } from "../shared/layouts/AdminLayout";
 import { PublicLayout } from "../shared/layouts/PublicLayout";
+import { AdminProtectedRoute } from "../features/auth/components/AdminProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -43,48 +44,57 @@ export const router = createBrowserRouter([
     element: <AdminLoginPage />,
   },
   {
-    path: "/admin",
-    element: <AdminLayout />,
+    path: "/admin/login",
+    element: <AdminLoginPage />,
+  },
+  {
+    element: <AdminProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <AdminDashboardPage />,
-      },
-      {
-        path: "produtos",
-        element: (
-          <AdminPlaceholderPage
-            title="Produtos"
-            description="Cadastre, edite, publique e arquive produtos."
-          />
-        ),
-      },
-      {
-        path: "categorias",
-        element: (
-          <AdminPlaceholderPage
-            title="Categorias"
-            description="Organize os diferentes tipos de produtos."
-          />
-        ),
-      },
-      {
-        path: "pagina-inicial",
-        element: (
-          <AdminPlaceholderPage
-            title="Página inicial"
-            description="Escolha as seções, os destaques e a ordem dos produtos."
-          />
-        ),
-      },
-      {
-        path: "configuracoes",
-        element: (
-          <AdminPlaceholderPage
-            title="Configurações"
-            description="Altere os dados da marca, WhatsApp e redes sociais."
-          />
-        ),
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminDashboardPage />,
+          },
+          {
+            path: "produtos",
+            element: (
+              <AdminPlaceholderPage
+                title="Produtos"
+                description="Cadastre, edite, publique e arquive produtos."
+              />
+            ),
+          },
+          {
+            path: "categorias",
+            element: (
+              <AdminPlaceholderPage
+                title="Categorias"
+                description="Organize os diferentes tipos de produtos."
+              />
+            ),
+          },
+          {
+            path: "pagina-inicial",
+            element: (
+              <AdminPlaceholderPage
+                title="Página inicial"
+                description="Escolha as seções, os destaques e a ordem dos produtos."
+              />
+            ),
+          },
+          {
+            path: "configuracoes",
+            element: (
+              <AdminPlaceholderPage
+                title="Configurações"
+                description="Altere os dados da marca, WhatsApp e redes sociais."
+              />
+            ),
+          },
+        ],
       },
     ],
   },

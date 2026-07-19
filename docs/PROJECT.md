@@ -78,6 +78,16 @@ O site não realizará vendas diretamente. Cada produto terá um botão que dire
 O administrador inicial é criado no Supabase Auth e vinculado
 manualmente à tabela private.administradores.
 
+## Autenticação administrativa
+
+- Login com e-mail e senha pelo Supabase Auth.
+- A sessão é recuperada automaticamente ao iniciar o React.
+- Todas as rotas /admin são protegidas.
+- Após o login, o banco verifica private.administradores.
+- Usuários autenticados sem permissão são desconectados.
+- O logout encerra somente a sessão atual.
+- O frontend controla a navegação, mas a segurança real fica no RLS.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.

@@ -1,3 +1,5 @@
+////nao e mais usado, posterior apagar
+
 import { useState } from "react";
 import { checkSupabaseConnection } from "../../../features/system/services/systemService";
 
