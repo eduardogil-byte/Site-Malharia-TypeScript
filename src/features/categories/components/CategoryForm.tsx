@@ -4,7 +4,7 @@ import {
   type ValidatedCategoryFormValues,
 } from "../schemas/categorySchema";
 import type { Category, CategoryFormValues } from "../types/category";
-import { createSlug } from "../utils/createSlug";
+import { createSlug } from "../../../shared/utils/createSlug";
 
 type CategoryFormProps = {
   category?: Category | null;
