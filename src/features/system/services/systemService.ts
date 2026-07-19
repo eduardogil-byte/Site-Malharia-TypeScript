@@ -1,3 +1,5 @@
+//Nao e mais usado, posterior apagar
+
 import { supabase } from "../../../lib/supabase";
 
 export async function checkSupabaseConnection(): Promise<boolean> {

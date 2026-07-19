@@ -1,5 +1,3 @@
-import { SupabaseConnectionStatus } from "../../shared/components/dev/SupabaseConnectionStatus";
-
 const dashboardItems = [
   {
     title: "Produtos",
@@ -43,10 +41,6 @@ export function AdminDashboardPage() {
             </p>
           </article>
         ))}
-      </div>
-
-      <div className="mt-8">
-        <SupabaseConnectionStatus />
       </div>
     </section>
   );
