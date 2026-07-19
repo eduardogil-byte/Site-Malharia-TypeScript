@@ -11,6 +11,7 @@ import { ProductPage } from "../pages/public/ProductPage";
 import { AdminLayout } from "../shared/layouts/AdminLayout";
 import { PublicLayout } from "../shared/layouts/PublicLayout";
 import { AdminProtectedRoute } from "../features/auth/components/AdminProtectedRoute";
+import { CategoriesPage } from "../pages/admin/CategoriesPage";
 
 export const router = createBrowserRouter([
   {
@@ -69,12 +70,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "categorias",
-            element: (
-              <AdminPlaceholderPage
-                title="Categorias"
-                description="Organize os diferentes tipos de produtos."
-              />
-            ),
+            element: <CategoriesPage />,
           },
           {
             path: "pagina-inicial",

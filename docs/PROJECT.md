@@ -88,6 +88,17 @@ manualmente à tabela private.administradores.
 - O logout encerra somente a sessão atual.
 - O frontend controla a navegação, mas a segurança real fica no RLS.
 
+## CRUD de categorias
+
+- Categorias podem ser cadastradas e editadas pelo painel.
+- O slug é gerado automaticamente e pode ser alterado.
+- Categorias podem ser ativadas ou desativadas.
+- Categorias são ordenadas por posição.
+- A reordenação é realizada por uma Database Function.
+- Categorias relacionadas a produtos não podem ser excluídas.
+- A validação existe no frontend e no PostgreSQL.
+- Visitantes visualizam apenas categorias ativas.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.

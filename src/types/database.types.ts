@@ -31,7 +31,7 @@ export type Database = {
           descricao?: string | null
           id?: string
           nome: string
-          posicao: number
+          posicao?: number
           slug: string
           updated_at?: string
         }
@@ -270,6 +270,10 @@ export type Database = {
     }
     Functions: {
       health_check: { Args: never; Returns: string }
+      reordenar_categorias: {
+        Args: { p_categoria_ids: string[] }
+        Returns: undefined
+      }
       usuario_atual_e_admin: { Args: never; Returns: boolean }
     }
     Enums: {
