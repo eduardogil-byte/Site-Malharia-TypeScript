@@ -99,6 +99,15 @@ manualmente à tabela private.administradores.
 - A validação existe no frontend e no PostgreSQL.
 - Visitantes visualizam apenas categorias ativas.
 
+## Listagem administrativa de produtos
+
+- Produtos são carregados do Supabase.
+- A categoria é consultada pelo relacionamento do banco.
+- A listagem aceita filtros por nome, categoria e status.
+- Produtos são ordenados pela última atualização.
+- A página apresenta status e disponibilidade.
+- O cadastro e a edição serão adicionados na próxima etapa.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
