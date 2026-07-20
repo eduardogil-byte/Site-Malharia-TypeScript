@@ -290,6 +290,10 @@ export type Database = {
         Args: { p_categoria_ids: string[] }
         Returns: undefined
       }
+      reordenar_imagens_produto: {
+        Args: { p_imagem_ids: string[]; p_produto_id: string }
+        Returns: undefined
+      }
       usuario_atual_e_admin: { Args: never; Returns: boolean }
     }
     Enums: {
