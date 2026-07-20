@@ -13,6 +13,7 @@ import { PublicLayout } from "../shared/layouts/PublicLayout";
 import { AdminProtectedRoute } from "../features/auth/components/AdminProtectedRoute";
 import { CategoriesPage } from "../pages/admin/CategoriesPage";
 import { ProductsPage } from "../pages/admin/ProductsPage";
+import { ProductFormPage } from "../pages/admin/ProductFormPage";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,14 @@ export const router = createBrowserRouter([
           {
             path: "produtos",
             element: <ProductsPage />,
+          },
+          {
+            path: "produtos/novo",
+            element: <ProductFormPage />,
+          },
+          {
+            path: "produtos/:productId/editar",
+            element: <ProductFormPage />,
           },
           {
             path: "categorias",

@@ -1,8 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { listCategoriesAdmin } from "../../categories/services/categoryService";
 import type { Category } from "../../categories/types/category";
-import { listProductsAdmin } from "../services/productService";
-import type { ProductListFilters, ProductWithCategory } from "../types/product";
+import {
+  deleteArchivedProduct,
+  listProductsAdmin,
+  setProductStatus,
+} from "../services/productService";
+import type {
+  ProductListFilters,
+  ProductStatus,
+  ProductWithCategory,
+} from "../types/product";
 
 export function useAdminProducts(filters: ProductListFilters) {
   const [products, setProducts] = useState<ProductWithCategory[]>([]);
@@ -44,6 +52,24 @@ export function useAdminProducts(filters: ProductListFilters) {
     }
   }, []);
 
+  const changeProductStatus = useCallback(
+    async (productId: string, status: ProductStatus) => {
+      await setProductStatus(productId, status);
+
+      await loadProducts();
+    },
+    [loadProducts],
+  );
+
+  const removeProduct = useCallback(
+    async (productId: string) => {
+      await deleteArchivedProduct(productId);
+
+      await loadProducts();
+    },
+    [loadProducts],
+  );
+
   useEffect(() => {
     void loadProducts();
   }, [loadProducts]);
@@ -58,5 +84,7 @@ export function useAdminProducts(filters: ProductListFilters) {
     isLoading,
     loadError,
     reload: loadProducts,
+    changeProductStatus,
+    removeProduct,
   };
 }

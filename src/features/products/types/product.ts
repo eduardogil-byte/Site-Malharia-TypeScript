@@ -25,3 +25,21 @@ export type ProductListFilters = {
   categoryId: string;
   status: ProductStatus | "";
 };
+
+export type ProductAttributeField = {
+  id: string;
+  chave: string;
+  valor: string;
+};
+
+export type ProductWriteInput = {
+  categoriaId: string;
+  nome: string;
+  slug: string;
+  descricaoCurta: string | null;
+  descricao: string | null;
+  status: ProductStatus;
+  disponivel: boolean;
+  atributos: Record<string, string>;
+  mensagemWhatsapp: string | null;
+};
