@@ -269,11 +269,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      excluir_imagem_produto: {
+        Args: { p_imagem_id: string }
+        Returns: undefined
+      }
       excluir_produto_arquivado: {
         Args: { p_produto_id: string }
         Returns: undefined
       }
       health_check: { Args: never; Returns: string }
+      registrar_imagem_produto: {
+        Args: {
+          p_alt_text?: string
+          p_produto_id: string
+          p_storage_path: string
+        }
+        Returns: string
+      }
       reordenar_categorias: {
         Args: { p_categoria_ids: string[] }
         Returns: undefined
