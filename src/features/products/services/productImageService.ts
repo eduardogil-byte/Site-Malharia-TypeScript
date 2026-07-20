@@ -1,8 +1,7 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../../../lib/supabase";
 import type { ProductImage } from "../types/productImage";
-
-export const PRODUCT_IMAGES_BUCKET = "catalogo-produtos";
+import { PRODUCT_IMAGES_BUCKET } from "../../../shared/constants/storage";
 
 export const MAX_PRODUCT_IMAGES = 8;
 
