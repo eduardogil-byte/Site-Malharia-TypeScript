@@ -11,6 +11,7 @@ import {
 } from "../../features/products/services/productService";
 import type { Product } from "../../features/products/types/product";
 import { attributesFieldsToRecord } from "../../features/products/utils/productAttributes";
+import { ProductImagesManager } from "../../features/products/components/ProductImagesManager";
 
 export function ProductFormPage() {
   const navigate = useNavigate();
@@ -103,11 +104,17 @@ export function ProductFormPage() {
     try {
       if (productId) {
         await updateProduct(productId, input);
-      } else {
-        await createProduct(input);
+
+        navigate("/admin/produtos", {
+          replace: true,
+        });
+
+        return;
       }
 
-      navigate("/admin/produtos", {
+      const createdProduct = await createProduct(input);
+
+      navigate(`/admin/produtos/${createdProduct.id}/editar`, {
         replace: true,
       });
     } catch (error) {
@@ -173,6 +180,12 @@ export function ProductFormPage() {
         onSubmit={handleSubmit}
         onCancel={() => navigate("/admin/produtos")}
       />
+
+      {product && (
+        <div className="mt-8">
+          <ProductImagesManager productId={product.id} />
+        </div>
+      )}
     </section>
   );
 }
