@@ -9,6 +9,7 @@ import {
   deleteProductImage,
   listProductImages,
   MAX_PRODUCT_IMAGES,
+  reorderProductImages,
   uploadProductImages,
 } from "../services/productImageService";
 import type { ProductImage } from "../types/productImage";
@@ -16,6 +17,15 @@ import type { ProductImage } from "../types/productImage";
 type ProductImagesManagerProps = {
   productId: string;
 };
+
+type MoveDirection = "up" | "down";
+
+function normalizeImagePositions(images: ProductImage[]): ProductImage[] {
+  return images.map((image, index) => ({
+    ...image,
+    posicao: index + 1,
+  }));
+}
 
 export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -27,6 +37,8 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const [isUploading, setIsUploading] = useState(false);
+
+  const [isReordering, setIsReordering] = useState(false);
 
   const [deletingImageId, setDeletingImageId] = useState<string | null>(null);
 
@@ -59,9 +71,13 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
     void loadImages();
   }, [loadImages]);
 
-  function handleFilesChange(event: ChangeEvent<HTMLInputElement>) {
+  function clearMessages() {
     setErrorMessage(null);
     setSuccessMessage(null);
+  }
+
+  function handleFilesChange(event: ChangeEvent<HTMLInputElement>) {
+    clearMessages();
 
     const files = Array.from(event.target.files ?? []);
 
@@ -69,12 +85,11 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
   }
 
   async function handleUpload() {
-    if (isUploading) {
+    if (isUploading || isReordering) {
       return;
     }
 
-    setErrorMessage(null);
-    setSuccessMessage(null);
+    clearMessages();
     setIsUploading(true);
 
     try {
@@ -102,7 +117,92 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
     }
   }
 
+  async function persistImageOrder(
+    nextImages: ProductImage[],
+    message: string,
+  ) {
+    if (isReordering || isUploading || deletingImageId) {
+      return;
+    }
+
+    const previousImages = images;
+
+    const normalizedImages = normalizeImagePositions(nextImages);
+
+    clearMessages();
+    setIsReordering(true);
+
+    /*
+     * Atualização otimista:
+     * a interface muda antes da resposta do banco.
+     */
+    setImages(normalizedImages);
+
+    try {
+      await reorderProductImages(
+        productId,
+        normalizedImages.map((image) => image.id),
+      );
+
+      setSuccessMessage(message);
+    } catch (error) {
+      console.error("Erro ao reordenar imagens:", error);
+
+      // Restaura a ordem anterior.
+      setImages(previousImages);
+
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível alterar a ordem das imagens.",
+      );
+    } finally {
+      setIsReordering(false);
+    }
+  }
+
+  async function handleMove(imageId: string, direction: MoveDirection) {
+    const currentIndex = images.findIndex((image) => image.id === imageId);
+
+    if (currentIndex === -1) {
+      return;
+    }
+
+    const targetIndex =
+      direction === "up" ? currentIndex - 1 : currentIndex + 1;
+
+    if (targetIndex < 0 || targetIndex >= images.length) {
+      return;
+    }
+
+    const reorderedImages = [...images];
+
+    [reorderedImages[currentIndex], reorderedImages[targetIndex]] = [
+      reorderedImages[targetIndex],
+      reorderedImages[currentIndex],
+    ];
+
+    await persistImageOrder(reorderedImages, "Ordem das imagens atualizada.");
+  }
+
+  async function handleSetAsCover(image: ProductImage) {
+    if (image.posicao === 1) {
+      return;
+    }
+
+    const reorderedImages = [
+      image,
+      ...images.filter((currentImage) => currentImage.id !== image.id),
+    ];
+
+    await persistImageOrder(reorderedImages, "Imagem definida como capa.");
+  }
+
   async function handleDelete(image: ProductImage) {
+    if (isReordering || isUploading || deletingImageId) {
+      return;
+    }
+
     const confirmed = window.confirm(
       image.posicao === 1
         ? "Esta é a imagem de capa. Deseja excluí-la? A próxima imagem se tornará a capa."
@@ -113,8 +213,7 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
       return;
     }
 
-    setErrorMessage(null);
-    setSuccessMessage(null);
+    clearMessages();
     setDeletingImageId(image.id);
 
     try {
@@ -137,6 +236,9 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
 
   const remainingSlots = MAX_PRODUCT_IMAGES - images.length;
 
+  const interactionsDisabled =
+    isUploading || isReordering || deletingImageId !== null;
+
   return (
     <section className="rounded-2xl border border-stone-200 bg-white p-6">
       <div>
@@ -145,7 +247,7 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
         </h2>
 
         <p className="mt-1 text-sm leading-6 text-stone-600">
-          Envie até {MAX_PRODUCT_IMAGES} imagens. A primeira imagem será
+          Envie até {MAX_PRODUCT_IMAGES} imagens. A imagem na posição 1 será
           utilizada como capa do produto.
         </p>
       </div>
@@ -168,6 +270,12 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
         </div>
       )}
 
+      {isReordering && (
+        <p role="status" className="mt-5 text-sm font-medium text-stone-600">
+          Salvando a nova ordem...
+        </p>
+      )}
+
       <div className="mt-6 rounded-xl border border-dashed border-stone-300 p-5">
         <label
           htmlFor="product-images"
@@ -183,7 +291,7 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
           multiple
           accept="image/jpeg,image/png,image/webp"
           onChange={handleFilesChange}
-          disabled={isUploading || remainingSlots === 0}
+          disabled={interactionsDisabled || remainingSlots === 0}
           className="mt-3 block w-full text-sm text-stone-600 file:mr-4 file:rounded-lg file:border-0 file:bg-stone-900 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-stone-700 disabled:opacity-50"
         />
 
@@ -207,7 +315,7 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
             <button
               type="button"
               onClick={() => void handleUpload()}
-              disabled={isUploading}
+              disabled={interactionsDisabled}
               className="mt-4 rounded-lg bg-stone-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isUploading
@@ -233,50 +341,85 @@ export function ProductImagesManager({ productId }: ProductImagesManagerProps) {
 
         {!isLoading && images.length > 0 && (
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {images.map((image) => (
-              <article
-                key={image.id}
-                className="overflow-hidden rounded-xl border border-stone-200"
-              >
-                <div className="relative aspect-square bg-stone-100">
-                  <img
-                    src={image.publicUrl}
-                    alt={image.alt_text ?? "Imagem do produto"}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+            {images.map((image, index) => {
+              const isDeleting = deletingImageId === image.id;
 
-                  {image.posicao === 1 && (
-                    <span className="absolute left-3 top-3 rounded-full bg-stone-950 px-3 py-1 text-xs font-medium text-white">
-                      Capa
-                    </span>
-                  )}
-                </div>
+              return (
+                <article
+                  key={image.id}
+                  className="overflow-hidden rounded-xl border border-stone-200"
+                >
+                  <div className="relative aspect-square bg-stone-100">
+                    <img
+                      src={image.publicUrl}
+                      alt={image.alt_text ?? "Imagem do produto"}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
 
-                <div className="p-4">
-                  <p className="text-sm font-medium text-stone-900">
-                    Imagem {image.posicao}
-                  </p>
+                    {image.posicao === 1 && (
+                      <span className="absolute left-3 top-3 rounded-full bg-stone-950 px-3 py-1 text-xs font-medium text-white">
+                        Capa
+                      </span>
+                    )}
+                  </div>
 
-                  {image.alt_text && (
-                    <p className="mt-1 truncate text-xs text-stone-500">
-                      {image.alt_text}
+                  <div className="p-4">
+                    <p className="text-sm font-medium text-stone-900">
+                      Imagem {image.posicao}
                     </p>
-                  )}
 
-                  <button
-                    type="button"
-                    onClick={() => void handleDelete(image)}
-                    disabled={deletingImageId === image.id}
-                    className="mt-4 w-full rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    {deletingImageId === image.id
-                      ? "Excluindo..."
-                      : "Excluir imagem"}
-                  </button>
-                </div>
-              </article>
-            ))}
+                    {image.alt_text && (
+                      <p className="mt-1 truncate text-xs text-stone-500">
+                        {image.alt_text}
+                      </p>
+                    )}
+
+                    <div className="mt-4 grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => void handleMove(image.id, "up")}
+                        disabled={interactionsDisabled || index === 0}
+                        className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Mover para cima
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => void handleMove(image.id, "down")}
+                        disabled={
+                          interactionsDisabled || index === images.length - 1
+                        }
+                        className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Mover para baixo
+                      </button>
+                    </div>
+
+                    {image.posicao !== 1 && (
+                      <button
+                        type="button"
+                        onClick={() => void handleSetAsCover(image)}
+                        disabled={interactionsDisabled}
+                        className="mt-2 w-full rounded-lg bg-stone-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        Definir como capa
+                      </button>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => void handleDelete(image)}
+                      disabled={interactionsDisabled}
+                      className="mt-2 w-full rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {isDeleting ? "Excluindo..." : "Excluir imagem"}
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         )}
       </div>

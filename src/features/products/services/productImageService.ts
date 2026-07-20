@@ -222,3 +222,23 @@ export async function deleteProductImage(image: ProductImage): Promise<void> {
     throw mapDatabaseError(databaseError);
   }
 }
+
+export async function reorderProductImages(
+  productId: string,
+  imageIds: string[],
+): Promise<void> {
+  if (imageIds.length === 0) {
+    throw new ProductImageValidationError(
+      "A lista de imagens não pode estar vazia.",
+    );
+  }
+
+  const { error } = await supabase.rpc("reordenar_imagens_produto", {
+    p_produto_id: productId,
+    p_imagem_ids: imageIds,
+  });
+
+  if (error) {
+    throw mapDatabaseError(error);
+  }
+}
