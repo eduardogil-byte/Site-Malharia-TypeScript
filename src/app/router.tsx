@@ -14,6 +14,7 @@ import { AdminProtectedRoute } from "../features/auth/components/AdminProtectedR
 import { CategoriesPage } from "../pages/admin/CategoriesPage";
 import { ProductsPage } from "../pages/admin/ProductsPage";
 import { ProductFormPage } from "../pages/admin/ProductFormPage";
+import { HomeSectionsPage } from "../pages/admin/HomeSectionsPage";
 
 export const router = createBrowserRouter([
   {
@@ -79,12 +80,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "pagina-inicial",
-            element: (
-              <AdminPlaceholderPage
-                title="Página inicial"
-                description="Escolha as seções, os destaques e a ordem dos produtos."
-              />
-            ),
+            element: <HomeSectionsPage />,
           },
           {
             path: "configuracoes",
