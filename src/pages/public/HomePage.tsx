@@ -1,30 +1,61 @@
 import { Link } from "react-router";
 import { PublicHomeSection } from "../../features/home/components/PublicHomeSection";
 import { usePublicHome } from "../../features/home/hooks/usePublicHome";
+import { usePublicSiteSettings } from "../../features/site-settings/context/PublicSiteSettingsContext";
+import { createGeneralWhatsAppUrl } from "../../features/site-settings/utils/publicContactLinks";
 
 export function HomePage() {
   const { sections, isLoading, loadError, reload } = usePublicHome();
 
+  const { settings } = usePublicSiteSettings();
+
+  const brandName = settings?.nomeMarca?.trim() || "Nossa marca";
+
+  const whatsappUrl = createGeneralWhatsAppUrl(
+    settings?.whatsapp ?? null,
+    `Olá! Gostaria de conhecer os produtos da ${brandName}.`,
+  );
+
+  const heroTitle =
+    settings?.slogan?.trim() ||
+    "Produtos escolhidos com cuidado para tornar cada criação especial.";
+
   return (
     <main>
-      <section className="relative overflow-hidden bg-stone-950 text-white">
-        <div aria-hidden="true" className="absolute inset-0 opacity-20">
-          <div className="absolute -left-28 top-10 size-80 rounded-full bg-white blur-3xl" />
+      <section
+        className={[
+          "relative overflow-hidden bg-stone-950 bg-cover bg-center text-white",
+          settings?.bannerUrl ? "min-h-[620px]" : "",
+        ].join(" ")}
+        style={
+          settings?.bannerUrl
+            ? {
+                backgroundImage: `url(${settings.bannerUrl})`,
+              }
+            : undefined
+        }
+      >
+        <div aria-hidden="true" className="absolute inset-0 bg-stone-950/70" />
 
-          <div className="absolute -right-32 bottom-0 size-96 rounded-full bg-stone-400 blur-3xl" />
-        </div>
+        {!settings?.bannerUrl && (
+          <div aria-hidden="true" className="absolute inset-0 opacity-20">
+            <div className="absolute -left-28 top-10 size-80 rounded-full bg-white blur-3xl" />
 
-        <div className="relative mx-auto grid min-h-[560px] max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
+            <div className="absolute -right-32 bottom-0 size-96 rounded-full bg-stone-400 blur-3xl" />
+          </div>
+        )}
+
+        <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-20 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-300">
-              Malhas e produtos artesanais
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-200">
+              {brandName}
             </p>
 
             <h1 className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Produtos escolhidos com cuidado para tornar cada criação especial.
+              {heroTitle}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-300">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-200">
               Conheça nossa seleção de malhas, sabonetes, velas, aromatizadores
               e outros produtos artesanais.
             </p>
@@ -37,49 +68,23 @@ export function HomePage() {
                 Ver catálogo
               </Link>
 
-              <Link
-                to="/contato"
-                className="inline-flex items-center justify-center rounded-xl border border-white/30 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Falar conosco
-              </Link>
-            </div>
-          </div>
-
-          <div className="hidden lg:block">
-            <div className="rounded-[2rem] border border-white/15 bg-white/10 p-8 backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-300">
-                Nosso catálogo
-              </p>
-
-              <div className="mt-6 space-y-5">
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <p className="text-lg font-semibold">Malhas</p>
-
-                  <p className="mt-2 text-sm leading-6 text-stone-300">
-                    Estampas, tecidos e opções para diferentes tipos de criação.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <p className="text-lg font-semibold">Produtos artesanais</p>
-
-                  <p className="mt-2 text-sm leading-6 text-stone-300">
-                    Sabonetes, velas, aromas e produtos produzidos com cuidado.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <p className="text-lg font-semibold">
-                    Atendimento personalizado
-                  </p>
-
-                  <p className="mt-2 text-sm leading-6 text-stone-300">
-                    Consulte detalhes e disponibilidade diretamente pelo
-                    WhatsApp.
-                  </p>
-                </div>
-              </div>
+              {whatsappUrl ? (
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl bg-green-600 px-6 py-4 text-sm font-semibold text-white transition hover:bg-green-700"
+                >
+                  Falar pelo WhatsApp
+                </a>
+              ) : (
+                <Link
+                  to="/contato"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/40 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Entrar em contato
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -102,7 +107,7 @@ export function HomePage() {
             <button
               type="button"
               onClick={() => void reload()}
-              className="mt-5 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800 transition hover:bg-red-100"
+              className="mt-5 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800 hover:bg-red-100"
             >
               Tentar novamente
             </button>
@@ -127,13 +132,12 @@ export function HomePage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-stone-600">
-            Em breve novos produtos estarão disponíveis nesta página. Você
-            também pode consultar o catálogo completo.
+            Em breve novos produtos estarão disponíveis nesta página.
           </p>
 
           <Link
             to="/catalogo"
-            className="mt-7 inline-flex rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-stone-700"
+            className="mt-7 inline-flex rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white hover:bg-stone-700"
           >
             Acessar catálogo
           </Link>
@@ -157,12 +161,23 @@ export function HomePage() {
             </p>
           </div>
 
-          <Link
-            to="/contato"
-            className="inline-flex shrink-0 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-stone-950 transition hover:bg-stone-200"
-          >
-            Entrar em contato
-          </Link>
+          {whatsappUrl ? (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex shrink-0 rounded-xl bg-green-600 px-6 py-4 text-sm font-semibold text-white hover:bg-green-700"
+            >
+              Falar pelo WhatsApp
+            </a>
+          ) : (
+            <Link
+              to="/contato"
+              className="inline-flex shrink-0 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-stone-950 hover:bg-stone-200"
+            >
+              Entrar em contato
+            </Link>
+          )}
         </div>
       </section>
     </main>
