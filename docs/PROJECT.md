@@ -108,6 +108,27 @@ manualmente à tabela private.administradores.
 - A página apresenta status e disponibilidade.
 - O cadastro e a edição serão adicionados na próxima etapa.
 
+## Página inicial
+
+A página inicial é formada por seções administráveis.
+
+Cada seção possui:
+
+- título;
+- subtítulo;
+- slug;
+- posição;
+- status ativo ou inativo;
+- limite de produtos;
+- produtos selecionados e ordenados.
+
+A Home pública exibe somente:
+
+- seções ativas;
+- produtos publicados;
+- produtos selecionados para cada seção;
+- produtos dentro do limite configurado.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
