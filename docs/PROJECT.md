@@ -129,6 +129,28 @@ A Home pública exibe somente:
 - produtos selecionados para cada seção;
 - produtos dentro do limite configurado.
 
+## Configurações do site
+
+As configurações institucionais são armazenadas no
+registro de ID 1 da tabela `configuracoes_site`.
+
+As configurações incluem:
+
+- nome da marca;
+- slogan;
+- WhatsApp;
+- Instagram;
+- e-mail;
+- endereço;
+- texto da página Sobre;
+- texto da página Contato;
+- caminho da logo;
+- caminho do banner.
+
+A logo e o banner são armazenados no bucket público
+`site-assets`. Somente administradores autenticados
+podem enviar ou excluir arquivos.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.

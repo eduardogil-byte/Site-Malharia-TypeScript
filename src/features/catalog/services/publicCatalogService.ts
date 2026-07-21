@@ -7,7 +7,6 @@ import type {
   PublicProduct,
   PublicProductCategory,
   PublicProductImage,
-  PublicSiteSettings,
 } from "../types/publicCatalog";
 
 type ProductImageDatabaseRow = {
@@ -202,34 +201,4 @@ export async function getPublicProductBySlug(
   }
 
   return mapPublicProduct(data as unknown as ProductDatabaseRow);
-}
-
-export async function getPublicSiteSettings(): Promise<PublicSiteSettings | null> {
-  const { data, error } = await supabase
-    .from("configuracoes_site")
-    .select(
-      `
-      nome_marca,
-      whatsapp
-    `,
-    )
-    .eq("id", 1)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Erro ao carregar configurações públicas:", error);
-
-    throw new PublicCatalogError(
-      "Não foi possível carregar os dados de contato.",
-    );
-  }
-
-  if (!data) {
-    return null;
-  }
-
-  return {
-    nomeMarca: data.nome_marca,
-    whatsapp: data.whatsapp,
-  };
 }
