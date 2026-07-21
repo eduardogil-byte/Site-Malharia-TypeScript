@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { AdminDashboardPage } from "../pages/admin/AdminDashboardPage";
 import { AdminLoginPage } from "../pages/admin/AdminLoginPage";
-import { AdminPlaceholderPage } from "../pages/admin/AdminPlaceholderPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import { AboutPage } from "../pages/public/AboutPage";
 import { CatalogPage } from "../pages/public/CatalogPage";
@@ -16,6 +15,7 @@ import { ProductsPage } from "../pages/admin/ProductsPage";
 import { ProductFormPage } from "../pages/admin/ProductFormPage";
 import { HomeSectionsPage } from "../pages/admin/HomeSectionsPage";
 import { HomeSectionProductsPage } from "../pages/admin/HomeSectionProductsPage";
+import { SiteSettingsPage } from "../pages/admin/SiteSettingsPage";
 
 export const router = createBrowserRouter([
   {
@@ -89,12 +89,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "configuracoes",
-            element: (
-              <AdminPlaceholderPage
-                title="Configurações"
-                description="Altere os dados da marca, WhatsApp e redes sociais."
-              />
-            ),
+            element: <SiteSettingsPage />,
           },
         ],
       },

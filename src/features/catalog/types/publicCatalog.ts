@@ -40,8 +40,3 @@ export type PublicCatalogFilters = {
   search: string;
   categoryId: string;
 };
-
-export type PublicSiteSettings = {
-  nomeMarca: string;
-  whatsapp: string | null;
-};

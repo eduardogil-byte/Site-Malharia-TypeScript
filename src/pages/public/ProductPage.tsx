@@ -1,16 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
 import { PublicProductGallery } from "../../features/catalog/components/PublicProductGallery";
-import {
-  getPublicProductBySlug,
-  getPublicSiteSettings,
-} from "../../features/catalog/services/publicCatalogService";
-import type {
-  PublicProduct,
-  PublicSiteSettings,
-} from "../../features/catalog/types/publicCatalog";
+import { getPublicProductBySlug } from "../../features/catalog/services/publicCatalogService";
+import type { PublicProduct } from "../../features/catalog/types/publicCatalog";
 import { createWhatsAppUrl } from "../../features/catalog/utils/createWhatsAppUrl";
 import { getProductAttributes } from "../../features/catalog/utils/getProductAttributes";
+import { getPublicSiteSettings } from "../../features/site-settings/services/siteSettingsService";
+import type { PublicSiteSettings } from "../../features/site-settings/types/siteSettings";
 
 export function ProductPage() {
   const { slug } = useParams<{

@@ -49,48 +49,66 @@ export type Database = {
       }
       configuracoes_site: {
         Row: {
+          banner_path: string | null
           created_at: string
           descricao_marca: string | null
+          email: string | null
           endereco: string | null
           hero_image_path: string | null
           hero_subtitulo: string | null
           hero_titulo: string | null
           id: number
+          instagram: string | null
           instagram_url: string | null
           logo_image_path: string | null
+          logo_path: string | null
           nome_marca: string
+          slogan: string | null
+          texto_contato: string | null
           texto_sobre: string | null
           updated_at: string
           updated_by: string | null
           whatsapp: string | null
         }
         Insert: {
+          banner_path?: string | null
           created_at?: string
           descricao_marca?: string | null
+          email?: string | null
           endereco?: string | null
           hero_image_path?: string | null
           hero_subtitulo?: string | null
           hero_titulo?: string | null
           id?: number
+          instagram?: string | null
           instagram_url?: string | null
           logo_image_path?: string | null
+          logo_path?: string | null
           nome_marca: string
+          slogan?: string | null
+          texto_contato?: string | null
           texto_sobre?: string | null
           updated_at?: string
           updated_by?: string | null
           whatsapp?: string | null
         }
         Update: {
+          banner_path?: string | null
           created_at?: string
           descricao_marca?: string | null
+          email?: string | null
           endereco?: string | null
           hero_image_path?: string | null
           hero_subtitulo?: string | null
           hero_titulo?: string | null
           id?: number
+          instagram?: string | null
           instagram_url?: string | null
           logo_image_path?: string | null
+          logo_path?: string | null
           nome_marca?: string
+          slogan?: string | null
+          texto_contato?: string | null
           texto_sobre?: string | null
           updated_at?: string
           updated_by?: string | null
