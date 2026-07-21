@@ -161,3 +161,23 @@ export async function reorderHomeSections(sectionIds: string[]): Promise<void> {
     throw mapHomeSectionError(error);
   }
 }
+
+export async function getHomeSectionAdmin(
+  sectionId: string,
+): Promise<HomeSection> {
+  const { data, error } = await supabase
+    .from("secoes_home")
+    .select("*")
+    .eq("id", sectionId)
+    .maybeSingle();
+
+  if (error) {
+    throw mapHomeSectionError(error);
+  }
+
+  if (!data) {
+    throw new HomeSectionNotFoundError();
+  }
+
+  return data;
+}

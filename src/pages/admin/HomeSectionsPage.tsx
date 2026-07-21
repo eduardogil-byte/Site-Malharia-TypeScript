@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { HomeSectionForm } from "../../features/home-sections/components/HomeSectionForm";
 import { useAdminHomeSections } from "../../features/home-sections/hooks/useAdminHomeSections";
 import type { ValidatedHomeSectionFormValues } from "../../features/home-sections/schemas/homeSectionSchema";
@@ -346,6 +347,12 @@ export function HomeSectionsPage() {
 
                         <td className="px-5 py-4">
                           <div className="flex flex-wrap justify-end gap-2">
+                            <Link
+                              to={`/admin/pagina-inicial/${section.id}/produtos`}
+                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100"
+                            >
+                              Produtos
+                            </Link>
                             <button
                               type="button"
                               onClick={() => openEditForm(section)}

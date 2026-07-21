@@ -298,6 +298,10 @@ export type Database = {
         Args: { p_secao_ids: string[] }
         Returns: undefined
       }
+      salvar_produtos_secao_home: {
+        Args: { p_produto_ids: string[]; p_secao_id: string }
+        Returns: undefined
+      }
       usuario_atual_e_admin: { Args: never; Returns: boolean }
     }
     Enums: {
