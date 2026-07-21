@@ -245,7 +245,7 @@ export type Database = {
           created_at?: string
           id?: string
           limite_produtos?: number
-          posicao: number
+          posicao?: number
           slug: string
           subtitulo?: string | null
           titulo: string
@@ -292,6 +292,10 @@ export type Database = {
       }
       reordenar_imagens_produto: {
         Args: { p_imagem_ids: string[]; p_produto_id: string }
+        Returns: undefined
+      }
+      reordenar_secoes_home: {
+        Args: { p_secao_ids: string[] }
         Returns: undefined
       }
       usuario_atual_e_admin: { Args: never; Returns: boolean }
