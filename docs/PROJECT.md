@@ -151,6 +151,22 @@ A logo e o banner são armazenados no bucket público
 `site-assets`. Somente administradores autenticados
 podem enviar ou excluir arquivos.
 
+## Layout público
+
+As configurações institucionais são carregadas pelo
+`PublicSiteSettingsProvider` e compartilhadas entre:
+
+- Header;
+- Footer;
+- Home;
+- página Sobre;
+- página Contato;
+- página de detalhes do produto.
+
+O layout público usa os dados cadastrados em
+`configuracoes_site`, incluindo nome da marca, slogan,
+logo, banner e canais de contato.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.

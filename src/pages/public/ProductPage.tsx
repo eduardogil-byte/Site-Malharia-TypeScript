@@ -5,17 +5,16 @@ import { getPublicProductBySlug } from "../../features/catalog/services/publicCa
 import type { PublicProduct } from "../../features/catalog/types/publicCatalog";
 import { createWhatsAppUrl } from "../../features/catalog/utils/createWhatsAppUrl";
 import { getProductAttributes } from "../../features/catalog/utils/getProductAttributes";
-import { getPublicSiteSettings } from "../../features/site-settings/services/siteSettingsService";
-import type { PublicSiteSettings } from "../../features/site-settings/types/siteSettings";
+import { usePublicSiteSettings } from "../../features/site-settings/context/PublicSiteSettingsContext";
 
 export function ProductPage() {
   const { slug } = useParams<{
     slug: string;
   }>();
 
-  const [product, setProduct] = useState<PublicProduct | null>(null);
+  const { settings } = usePublicSiteSettings();
 
-  const [settings, setSettings] = useState<PublicSiteSettings | null>(null);
+  const [product, setProduct] = useState<PublicProduct | null>(null);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -35,17 +34,13 @@ export function ProductPage() {
       setLoadError(null);
 
       try {
-        const [productData, settingsData] = await Promise.all([
-          getPublicProductBySlug(slug),
-          getPublicSiteSettings(),
-        ]);
+        const productData = await getPublicProductBySlug(slug);
 
         if (cancelled) {
           return;
         }
 
         setProduct(productData);
-        setSettings(settingsData);
       } catch (error) {
         if (cancelled) {
           return;
