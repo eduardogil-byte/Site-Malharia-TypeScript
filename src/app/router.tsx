@@ -15,6 +15,7 @@ import { CategoriesPage } from "../pages/admin/CategoriesPage";
 import { ProductsPage } from "../pages/admin/ProductsPage";
 import { ProductFormPage } from "../pages/admin/ProductFormPage";
 import { HomeSectionsPage } from "../pages/admin/HomeSectionsPage";
+import { HomeSectionProductsPage } from "../pages/admin/HomeSectionProductsPage";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
           {
             path: "pagina-inicial",
             element: <HomeSectionsPage />,
+          },
+          {
+            path: "pagina-inicial/:sectionId/produtos",
+            element: <HomeSectionProductsPage />,
           },
           {
             path: "configuracoes",
