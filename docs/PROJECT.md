@@ -167,6 +167,20 @@ O layout público usa os dados cadastrados em
 `configuracoes_site`, incluindo nome da marca, slogan,
 logo, banner e canais de contato.
 
+## Tratamento de erros e rotas inexistentes
+
+O projeto possui tratamento para:
+
+- rotas públicas inexistentes;
+- rotas administrativas inexistentes;
+- erros inesperados durante a renderização;
+- produtos não encontrados;
+- registros administrativos não encontrados.
+
+O `RouteErrorPage` é utilizado como `errorElement` do
+React Router. Detalhes técnicos são apresentados somente
+no ambiente de desenvolvimento.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.

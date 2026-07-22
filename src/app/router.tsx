@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { AdminDashboardPage } from "../pages/admin/AdminDashboardPage";
 import { AdminLoginPage } from "../pages/admin/AdminLoginPage";
-import { NotFoundPage } from "../pages/NotFoundPage";
+import { NotFoundPage } from "../pages/public/NotFoundPage";
 import { AboutPage } from "../pages/public/AboutPage";
 import { CatalogPage } from "../pages/public/CatalogPage";
 import { ContactPage } from "../pages/public/ContactPage";
@@ -16,11 +16,14 @@ import { ProductFormPage } from "../pages/admin/ProductFormPage";
 import { HomeSectionsPage } from "../pages/admin/HomeSectionsPage";
 import { HomeSectionProductsPage } from "../pages/admin/HomeSectionProductsPage";
 import { SiteSettingsPage } from "../pages/admin/SiteSettingsPage";
+import { RouteErrorPage } from "../components/shared/RouteErrorPage";
+import { AdminNotFoundPage } from "../pages/admin/AdminNotFoundPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicLayout />,
+    errorElement: <RouteErrorPage />,
     children: [
       {
         index: true,
@@ -90,6 +93,10 @@ export const router = createBrowserRouter([
           {
             path: "configuracoes",
             element: <SiteSettingsPage />,
+          },
+          {
+            path: "*",
+            element: <AdminNotFoundPage />,
           },
         ],
       },

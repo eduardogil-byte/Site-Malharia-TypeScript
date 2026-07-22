@@ -8,9 +8,9 @@ function PublicLayoutContent() {
     <div className="flex min-h-screen flex-col bg-white text-stone-950">
       <PublicHeader />
 
-      <div className="flex-1">
+      <main id="main-content" className="flex-1">
         <Outlet />
-      </div>
+      </main>
 
       <PublicFooter />
     </div>
