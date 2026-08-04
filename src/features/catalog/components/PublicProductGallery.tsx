@@ -50,16 +50,18 @@ export function PublicProductGallery({
                 type="button"
                 onClick={() => setSelectedImageId(image.id)}
                 aria-label={`Visualizar imagem ${image.posicao} de ${productName}`}
+                aria-pressed={isSelected}
                 className={[
                   "aspect-square overflow-hidden rounded-lg border-2 bg-stone-100 transition",
                   isSelected
-                    ? "border-stone-900"
+                    ? "border-stone-900 ring-2 ring-stone-900/20"
                     : "border-transparent hover:border-stone-400",
                 ].join(" ")}
               >
                 <img
                   src={image.publicUrl}
                   alt=""
+                  loading="lazy"
                   className="h-full w-full object-cover"
                 />
               </button>

@@ -9,8 +9,12 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
   const coverImage = product.imagens[0];
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-      <Link to={`/produto/${product.slug}`} className="block">
+    <article className="group h-full overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+      <Link
+        to={`/produto/${product.slug}`}
+        aria-label={`Ver detalhes do produto ${product.nome}`}
+        className="block h-full rounded-2xl"
+      >
         <div className="aspect-square overflow-hidden bg-stone-100">
           {coverImage ? (
             <img
@@ -26,7 +30,7 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
           )}
         </div>
 
-        <div className="p-5">
+        <div className="flex min-h-52 flex-col p-5">
           {product.categoria && (
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-stone-500">
               {product.categoria.nome}
@@ -49,7 +53,7 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
             </span>
           )}
 
-          <span className="mt-5 block text-sm font-semibold text-stone-900">
+          <span className="mt-auto block pt-5 text-sm font-semibold text-stone-900">
             Ver detalhes
           </span>
         </div>
