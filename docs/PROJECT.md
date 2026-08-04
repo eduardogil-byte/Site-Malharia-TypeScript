@@ -181,6 +181,19 @@ O `RouteErrorPage` é utilizado como `errorElement` do
 React Router. Detalhes técnicos são apresentados somente
 no ambiente de desenvolvimento.
 
+## Acessibilidade do site público
+
+O layout público possui:
+
+- link para pular diretamente ao conteúdo;
+- gerenciamento de foco durante a navegação;
+- foco visível para navegação pelo teclado;
+- menu mobile controlável por teclado;
+- fechamento do menu com a tecla Escape;
+- indicação da miniatura selecionada na galeria;
+- suporte à preferência por redução de movimentos;
+- apenas um elemento `main` por página.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
