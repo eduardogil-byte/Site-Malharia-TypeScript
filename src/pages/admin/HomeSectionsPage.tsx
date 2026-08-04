@@ -4,6 +4,7 @@ import { HomeSectionForm } from "../../features/home-sections/components/HomeSec
 import { useAdminHomeSections } from "../../features/home-sections/hooks/useAdminHomeSections";
 import type { ValidatedHomeSectionFormValues } from "../../features/home-sections/schemas/homeSectionSchema";
 import type { HomeSection } from "../../features/home-sections/types/homeSection";
+import { ResponsiveTableRegion } from "../../shared/components/ResponsiveTableRegion";
 
 export function HomeSectionsPage() {
   const {

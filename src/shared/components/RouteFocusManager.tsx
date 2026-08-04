@@ -1,29 +1,38 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 
-export function RouteFocusManager() {
+type RouteFocusManagerProps = {
+  targetId?: string;
+};
+
+export function RouteFocusManager({
+  targetId = "main-content",
+}: RouteFocusManagerProps) {
   const location = useLocation();
 
   useEffect(() => {
-    const mainElement =
-      document.getElementById(
-        "main-content",
-      );
+    const animationFrameId = window.requestAnimationFrame(() => {
+      const targetElement = document.getElementById(targetId);
 
-    if (!mainElement) {
-      return;
-    }
+      if (!targetElement) {
+        return;
+      }
 
-    mainElement.focus({
-      preventScroll: true,
+      targetElement.focus({
+        preventScroll: true,
+      });
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
     });
 
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto",
-    });
-  }, [location.pathname]);
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [location.pathname, targetId]);
 
   return null;
 }
