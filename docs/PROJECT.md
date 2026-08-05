@@ -226,6 +226,23 @@ Comandos:
 npm test
 npm run test:run
 
+### Testes de componentes
+
+Os testes de componentes utilizam React Testing Library
+e `user-event`.
+
+A cobertura inicial inclui:
+
+- link para pular ao conteúdo;
+- regiões roláveis de tabelas;
+- cards públicos de produtos;
+- Header e menu mobile;
+- navegação administrativa;
+- formulário de configurações.
+
+Os componentes são testados pela interface visível e por
+seus nomes acessíveis, evitando depender do estado interno.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
