@@ -208,6 +208,24 @@ O painel possui:
 - botões de ordenação com nomes acessíveis;
 - formulários e ações adaptados para telas pequenas.
 
+## Testes automatizados
+
+O projeto utiliza Vitest para testes automatizados.
+
+Os testes iniciais cobrem:
+
+- geração de slugs;
+- criação de links do WhatsApp;
+- tratamento de links do Instagram;
+- validação das configurações do site;
+- validação das seções da página inicial.
+
+Comandos:
+
+```bash
+npm test
+npm run test:run
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
@@ -231,3 +249,4 @@ Estrutura principal do banco criada.
 - RLS ativado em todas as tabelas públicas
 - Nenhuma política pública criada
 - Nenhum CRUD liberado
+```
