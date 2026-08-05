@@ -180,7 +180,7 @@ export function HomeSectionsPage() {
         <button
           type="button"
           onClick={openCreateForm}
-          className="rounded-lg bg-stone-900 px-4 py-3 text-sm font-medium text-white hover:bg-stone-700"
+          className="w-full rounded-lg bg-stone-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-stone-700 sm:w-auto"
         >
           Nova seção
         </button>
@@ -218,7 +218,10 @@ export function HomeSectionsPage() {
 
       <div className="mt-8">
         {isLoading && (
-          <div className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600">
+          <div
+            aria-live="polite"
+            className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600"
+          >
             Carregando seções...
           </div>
         )}
@@ -230,7 +233,7 @@ export function HomeSectionsPage() {
             <button
               type="button"
               onClick={() => void reload()}
-              className="mt-4 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800"
+              className="mt-4 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800 transition hover:bg-red-100"
             >
               Tentar novamente
             </button>
@@ -251,27 +254,42 @@ export function HomeSectionsPage() {
 
         {!isLoading && !loadError && sections.length > 0 && (
           <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left">
+            <ResponsiveTableRegion label="Lista de seções da página inicial">
+              <table className="w-full min-w-[860px] border-collapse text-left">
                 <thead className="bg-stone-50">
                   <tr>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase text-stone-500">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-xs font-semibold uppercase text-stone-500"
+                    >
                       Ordem
                     </th>
 
-                    <th className="px-5 py-4 text-xs font-semibold uppercase text-stone-500">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-xs font-semibold uppercase text-stone-500"
+                    >
                       Seção
                     </th>
 
-                    <th className="px-5 py-4 text-xs font-semibold uppercase text-stone-500">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-xs font-semibold uppercase text-stone-500"
+                    >
                       Limite
                     </th>
 
-                    <th className="px-5 py-4 text-xs font-semibold uppercase text-stone-500">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-xs font-semibold uppercase text-stone-500"
+                    >
                       Status
                     </th>
 
-                    <th className="px-5 py-4 text-right text-xs font-semibold uppercase text-stone-500">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-right text-xs font-semibold uppercase text-stone-500"
+                    >
                       Ações
                     </th>
                   </tr>
@@ -293,9 +311,11 @@ export function HomeSectionsPage() {
                               type="button"
                               onClick={() => void handleMove(section.id, "up")}
                               disabled={isActing || index === 0}
-                              className="rounded border border-stone-300 px-2 py-1 disabled:opacity-30"
+                              aria-label={`Mover a seção ${section.titulo} para cima`}
+                              title="Mover para cima"
+                              className="inline-flex min-h-10 min-w-10 items-center justify-center rounded border border-stone-300 px-2 py-1 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-30"
                             >
-                              ↑
+                              <span aria-hidden="true">↑</span>
                             </button>
 
                             <button
@@ -306,9 +326,11 @@ export function HomeSectionsPage() {
                               disabled={
                                 isActing || index === sections.length - 1
                               }
-                              className="rounded border border-stone-300 px-2 py-1 disabled:opacity-30"
+                              aria-label={`Mover a seção ${section.titulo} para baixo`}
+                              title="Mover para baixo"
+                              className="inline-flex min-h-10 min-w-10 items-center justify-center rounded border border-stone-300 px-2 py-1 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-30"
                             >
-                              ↓
+                              <span aria-hidden="true">↓</span>
                             </button>
                           </div>
                         </td>
@@ -350,15 +372,16 @@ export function HomeSectionsPage() {
                           <div className="flex flex-wrap justify-end gap-2">
                             <Link
                               to={`/admin/pagina-inicial/${section.id}/produtos`}
-                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100"
+                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100"
                             >
                               Produtos
                             </Link>
+
                             <button
                               type="button"
                               onClick={() => openEditForm(section)}
                               disabled={isActing}
-                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium"
+                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               Editar
                             </button>
@@ -367,7 +390,7 @@ export function HomeSectionsPage() {
                               type="button"
                               onClick={() => void handleToggle(section)}
                               disabled={isActing}
-                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium"
+                              className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               {section.ativa ? "Desativar" : "Ativar"}
                             </button>
@@ -376,7 +399,7 @@ export function HomeSectionsPage() {
                               type="button"
                               onClick={() => void handleDelete(section)}
                               disabled={isActing}
-                              className="rounded-lg border border-red-200 px-3 py-2 text-xs font-medium text-red-700"
+                              className="rounded-lg border border-red-200 px-3 py-2 text-xs font-medium text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               Excluir
                             </button>
@@ -387,7 +410,7 @@ export function HomeSectionsPage() {
                   })}
                 </tbody>
               </table>
-            </div>
+            </ResponsiveTableRegion>
           </div>
         )}
       </div>

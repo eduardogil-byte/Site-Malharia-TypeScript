@@ -194,6 +194,20 @@ O layout público possui:
 - suporte à preferência por redução de movimentos;
 - apenas um elemento `main` por página.
 
+## Acessibilidade do painel administrativo
+
+O painel possui:
+
+- navegação lateral para telas grandes;
+- navegação expansível para celular e tablet;
+- fechamento do menu pela tecla Escape;
+- fechamento automático após mudança de rota;
+- link para pular ao conteúdo administrativo;
+- gerenciamento de foco durante a navegação;
+- regiões de tabelas acessíveis e roláveis;
+- botões de ordenação com nomes acessíveis;
+- formulários e ações adaptados para telas pequenas.
+
 ## Etapa atual
 
 Estrutura principal do banco criada.
