@@ -7,6 +7,8 @@ import type {
   ProductWithCategory,
 } from "../../features/products/types/product";
 
+import { ResponsiveTableRegion } from "../../shared/components/ResponsiveTableRegion";
+
 const initialFilters: ProductListFilters = {
   search: "",
   categoryId: "",
@@ -386,8 +388,8 @@ export function ProductsPage() {
               </p>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left">
+            <ResponsiveTableRegion label="Lista administrativa de produtos">
+              <table className="w-full min-w-[980px] border-collapse text-left">
                 <thead className="bg-stone-50">
                   <tr>
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-stone-500">
@@ -516,7 +518,7 @@ export function ProductsPage() {
                   })}
                 </tbody>
               </table>
-            </div>
+            </ResponsiveTableRegion>
           </div>
         )}
       </div>

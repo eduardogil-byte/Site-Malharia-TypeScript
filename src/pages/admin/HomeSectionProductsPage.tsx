@@ -85,7 +85,10 @@ export function HomeSectionProductsPage() {
 
   if (isLoading) {
     return (
-      <div className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600">
+      <div
+        aria-live="polite"
+        className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600"
+      >
         Carregando seção...
       </div>
     );
@@ -101,7 +104,7 @@ export function HomeSectionProductsPage() {
         <button
           type="button"
           onClick={() => void reload()}
-          className="mt-4 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800"
+          className="mt-4 rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-800 transition hover:bg-red-100"
         >
           Tentar novamente
         </button>
@@ -114,20 +117,22 @@ export function HomeSectionProductsPage() {
       <header>
         <Link
           to="/admin/pagina-inicial"
-          className="text-sm font-medium text-stone-600 hover:text-stone-950"
+          className="inline-flex min-h-11 items-center rounded-lg text-sm font-medium text-stone-600 transition hover:text-stone-950"
         >
-          ← Voltar para as seções
+          <span aria-hidden="true">←</span>
+
+          <span className="ml-2">Voltar para as seções</span>
         </Link>
 
         <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
           Página inicial
         </p>
 
-        <h1 className="mt-2 text-3xl font-semibold text-stone-950">
+        <h1 className="mt-2 break-words text-3xl font-semibold text-stone-950">
           {section.titulo}
         </h1>
 
-        <p className="mt-3 text-stone-600">
+        <p className="mt-3 max-w-3xl text-stone-600">
           Escolha os produtos e defina a ordem em que eles aparecerão nesta
           seção.
         </p>
@@ -157,7 +162,7 @@ export function HomeSectionProductsPage() {
       )}
 
       <div className="mt-8 grid gap-8 xl:grid-cols-2">
-        <section className="rounded-2xl border border-stone-200 bg-white p-6">
+        <section className="min-w-0 rounded-2xl border border-stone-200 bg-white p-4 sm:p-6">
           <h2 className="text-xl font-semibold text-stone-950">
             Produtos selecionados
           </h2>
@@ -178,13 +183,13 @@ export function HomeSectionProductsPage() {
                 key={product.id}
                 className="rounded-xl border border-stone-200 p-4"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-medium text-stone-950">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="break-words font-medium text-stone-950">
                       {index + 1}. {product.nome}
                     </p>
 
-                    <p className="mt-1 text-xs text-stone-500">
+                    <p className="mt-1 break-words text-xs text-stone-500">
                       {product.categoria?.nome ?? "Sem categoria"}
                     </p>
 
@@ -198,7 +203,7 @@ export function HomeSectionProductsPage() {
                     </span>
 
                     {product.status !== "publicado" && (
-                      <p className="mt-2 text-xs text-amber-700">
+                      <p className="mt-2 text-xs leading-5 text-amber-700">
                         Este produto só aparecerá publicamente quando estiver
                         publicado.
                       </p>
@@ -209,18 +214,19 @@ export function HomeSectionProductsPage() {
                     type="button"
                     onClick={() => removeProduct(product.id)}
                     disabled={isSaving}
-                    className="text-sm font-medium text-red-700 hover:text-red-900 disabled:opacity-50"
+                    className="min-h-11 w-full rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                   >
                     Remover
                   </button>
                 </div>
 
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 grid gap-2 sm:grid-cols-2">
                   <button
                     type="button"
                     onClick={() => moveProduct(product.id, "up")}
                     disabled={isSaving || index === 0}
-                    className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium disabled:opacity-30"
+                    aria-label={`Mover o produto ${product.nome} para cima`}
+                    className="min-h-11 rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Mover para cima
                   </button>
@@ -229,7 +235,8 @@ export function HomeSectionProductsPage() {
                     type="button"
                     onClick={() => moveProduct(product.id, "down")}
                     disabled={isSaving || index === selectedProducts.length - 1}
-                    className="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium disabled:opacity-30"
+                    aria-label={`Mover o produto ${product.nome} para baixo`}
+                    className="min-h-11 rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Mover para baixo
                   </button>
@@ -239,7 +246,7 @@ export function HomeSectionProductsPage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-stone-200 bg-white p-6">
+        <section className="min-w-0 rounded-2xl border border-stone-200 bg-white p-4 sm:p-6">
           <h2 className="text-xl font-semibold text-stone-950">
             Produtos disponíveis
           </h2>
@@ -258,12 +265,15 @@ export function HomeSectionProductsPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Produto ou categoria"
-              className="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10"
+              className="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none transition focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10"
             />
           </div>
 
           {limitReached && (
-            <p className="mt-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            <p
+              role="status"
+              className="mt-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800"
+            >
               O limite de produtos desta seção foi atingido.
             </p>
           )}
@@ -281,12 +291,14 @@ export function HomeSectionProductsPage() {
               return (
                 <article
                   key={product.id}
-                  className="flex items-center justify-between gap-4 rounded-xl border border-stone-200 p-4"
+                  className="flex flex-col gap-4 rounded-xl border border-stone-200 p-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <p className="font-medium text-stone-950">{product.nome}</p>
+                  <div className="min-w-0">
+                    <p className="break-words font-medium text-stone-950">
+                      {product.nome}
+                    </p>
 
-                    <p className="mt-1 text-xs text-stone-500">
+                    <p className="mt-1 break-words text-xs text-stone-500">
                       {product.categoria?.nome ?? "Sem categoria"}
                     </p>
 
@@ -309,7 +321,7 @@ export function HomeSectionProductsPage() {
                         ? "Produtos arquivados não podem ser adicionados."
                         : undefined
                     }
-                    className="rounded-lg bg-stone-900 px-3 py-2 text-sm font-medium text-white hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="min-h-11 w-full rounded-lg bg-stone-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
                   >
                     Adicionar
                   </button>
@@ -320,19 +332,19 @@ export function HomeSectionProductsPage() {
         </section>
       </div>
 
-      <div className="sticky bottom-4 mt-8 flex flex-col items-end justify-between gap-4 rounded-2xl border border-stone-200 bg-white/95 p-5 shadow-lg backdrop-blur sm:flex-row sm:items-center">
-        <p className="text-sm text-stone-600">
+      <div className="sticky bottom-3 z-20 mt-8 flex flex-col gap-4 rounded-2xl border border-stone-200 bg-white/95 p-4 shadow-lg backdrop-blur sm:bottom-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+        <p role="status" className="text-sm text-stone-600">
           {hasChanges
             ? "Existem alterações ainda não salvas."
             : "Todas as alterações estão salvas."}
         </p>
 
-        <div className="flex gap-3">
+        <div className="grid w-full gap-3 sm:flex sm:w-auto">
           <button
             type="button"
             onClick={resetSelection}
             disabled={!hasChanges || isSaving}
-            className="rounded-lg border border-stone-300 px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-100 disabled:opacity-40"
+            className="min-h-11 w-full rounded-lg border border-stone-300 px-4 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
           >
             Desfazer alterações
           </button>
@@ -341,7 +353,7 @@ export function HomeSectionProductsPage() {
             type="button"
             onClick={() => void handleSave()}
             disabled={!hasChanges || isSaving}
-            className="rounded-lg bg-stone-900 px-5 py-3 text-sm font-medium text-white hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="min-h-11 w-full rounded-lg bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
           >
             {isSaving ? "Salvando..." : "Salvar produtos"}
           </button>

@@ -3,6 +3,7 @@ import { CategoryForm } from "../../features/categories/components/CategoryForm"
 import { useAdminCategories } from "../../features/categories/hooks/useAdminCategories";
 import type { ValidatedCategoryFormValues } from "../../features/categories/schemas/categorySchema";
 import type { Category } from "../../features/categories/types/category";
+import { ResponsiveTableRegion } from "../../shared/components/ResponsiveTableRegion";
 
 export function CategoriesPage() {
   const {
@@ -241,8 +242,8 @@ export function CategoriesPage() {
 
         {!isLoading && !loadError && categories.length > 0 && (
           <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left">
+            <ResponsiveTableRegion label="Lista administrativa de categorias">
+              <table className="w-full min-w-[760px] border-collapse text-left">
                 <thead className="bg-stone-50">
                   <tr>
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-stone-500">
@@ -355,7 +356,7 @@ export function CategoriesPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </ResponsiveTableRegion>
           </div>
         )}
       </div>
