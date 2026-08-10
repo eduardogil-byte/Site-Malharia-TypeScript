@@ -9,13 +9,13 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
   const coverImage = product.imagens[0];
 
   return (
-    <article className="group h-full bg-transparent">
+    <article className="group h-full bg-transparent shadow-lg  p-3">
       <Link
         to={`/produto/${product.slug}`}
         aria-label={`Ver detalhes do produto ${product.nome}`}
         className="block h-full rounded-sm"
       >
-        <div className="aspect-[4/5] overflow-hidden bg-stone-100">
+        <div className="aspect-[4/5] overflow-hidden bg-stone-100 ">
           {coverImage ? (
             <img
               src={coverImage.publicUrl}

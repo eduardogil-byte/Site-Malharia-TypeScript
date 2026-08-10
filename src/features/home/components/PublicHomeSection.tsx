@@ -16,12 +16,10 @@ export function PublicHomeSection({
       id={section.slug}
       className={mutedBackground ? "bg-stone-50" : "bg-white"}
     >
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-12">
         <header className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
-            <p className="eyebrow">
-              Seleção especial
-            </p>
+            <p className="eyebrow">Seleção especial</p>
 
             <h2 className="mt-3 text-4xl leading-tight text-stone-950 sm:text-5xl">
               {section.titulo}

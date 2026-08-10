@@ -48,8 +48,8 @@ export function HomePage() {
           </div>
         )}
 
-        <div className="relative mx-auto flex min-h-[min(760px,calc(100svh-5.5rem))] max-w-7xl items-end px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <div className="max-w-3xl">
+        <div className="relative mx-auto flex min-h-[min(730px,calc(100svh-5.5rem))] max-w-7xl items-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="max-w-4xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200">
               {brandName}
             </p>
@@ -138,10 +138,7 @@ export function HomePage() {
             Em breve novos produtos estarão disponíveis nesta página.
           </p>
 
-          <Link
-            to="/catalogo"
-            className="button-primary mt-8"
-          >
+          <Link to="/catalogo" className="button-primary mt-8">
             Acessar catálogo
           </Link>
         </section>
