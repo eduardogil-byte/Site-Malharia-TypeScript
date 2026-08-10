@@ -188,11 +188,11 @@ export function ProductsPage() {
     <section>
       <header className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
             Administração
           </p>
 
-          <h1 className="mt-2 text-3xl font-semibold text-stone-950">
+          <h1 className="mt-3 text-4xl font-semibold text-stone-950">
             Produtos
           </h1>
 

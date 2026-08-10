@@ -2,13 +2,13 @@ import { Link } from "react-router";
 
 export function NotFoundPage() {
   return (
-    <section className="mx-auto flex min-h-[65vh] max-w-5xl items-center justify-center px-4 py-16 text-center sm:px-6 lg:px-8">
+    <section className="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
       <section>
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-500">
+        <p className="eyebrow">
           Erro 404
         </p>
 
-        <h1 className="mt-4 text-4xl font-semibold text-stone-950 sm:text-5xl">
+        <h1 className="mt-5 text-5xl leading-none text-stone-950 sm:text-6xl">
           Página não encontrada
         </h1>
 
@@ -20,14 +20,14 @@ export function NotFoundPage() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             to="/"
-            className="inline-flex justify-center rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-stone-700"
+            className="button-primary"
           >
             Voltar ao início
           </Link>
 
           <Link
             to="/catalogo"
-            className="inline-flex justify-center rounded-xl border border-stone-300 px-6 py-4 text-sm font-semibold text-stone-800 transition hover:bg-stone-100"
+            className="button-secondary"
           >
             Abrir catálogo
           </Link>

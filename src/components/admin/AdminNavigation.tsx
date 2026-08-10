@@ -41,7 +41,7 @@ export function AdminNavigation({
 }: AdminNavigationProps) {
   return (
     <div className="flex h-full flex-col">
-      <nav aria-label="Navegação administrativa" className="space-y-1">
+      <nav aria-label="Navegação administrativa" className="space-y-1.5">
         {navigationItems.map((item) => (
           <NavLink
             key={item.to}
@@ -50,10 +50,10 @@ export function AdminNavigation({
             onClick={onNavigate}
             className={({ isActive }) =>
               [
-                "flex min-h-11 items-center rounded-lg px-4 py-3 text-sm font-medium transition",
+                "flex min-h-11 items-center rounded-md border-l-2 px-4 py-3 text-sm font-medium transition",
                 isActive
-                  ? "bg-stone-900 text-white"
-                  : "text-stone-700 hover:bg-stone-100 hover:text-stone-950",
+                  ? "border-stone-950 bg-stone-950 text-white shadow-soft"
+                  : "border-transparent text-stone-700 hover:border-stone-300 hover:bg-stone-100 hover:text-stone-950",
               ].join(" ")
             }
           >
@@ -66,7 +66,7 @@ export function AdminNavigation({
         <Link
           to="/"
           onClick={onNavigate}
-          className="flex min-h-11 items-center rounded-lg px-4 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100 hover:text-stone-950"
+          className="flex min-h-11 items-center rounded-md px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-100 hover:text-stone-950"
         >
           Ver site público
         </Link>
@@ -78,7 +78,7 @@ export function AdminNavigation({
               void onLogout();
             }}
             disabled={isLoggingOut}
-            className="mt-1 flex min-h-11 w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-1 flex min-h-11 w-full items-center rounded-md px-4 py-3 text-left text-sm font-medium text-red-700 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoggingOut ? "Saindo..." : "Sair do painel"}
           </button>

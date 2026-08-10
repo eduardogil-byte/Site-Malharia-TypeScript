@@ -94,22 +94,22 @@ export function PublicHeader() {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-stone-200/80 bg-white/90 backdrop-blur-xl">
+      <div className="mx-auto flex min-h-[5.5rem] max-w-7xl items-center justify-between gap-5 px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
           onClick={closeMenu}
           aria-label={`${brandName} — página inicial`}
-          className="flex min-w-0 items-center gap-3 rounded-lg"
+          className="flex min-w-0 items-center gap-3 rounded-sm"
         >
           {settings?.logoUrl ? (
             <img
               src={settings.logoUrl}
               alt=""
-              className="h-11 w-auto max-w-40 object-contain sm:h-12 sm:max-w-48"
+              className="h-10 w-auto max-w-40 object-contain sm:h-12 sm:max-w-52"
             />
           ) : (
-            <span className="truncate text-lg font-semibold text-stone-950 sm:text-xl">
+            <span className="truncate font-display text-2xl tracking-[-0.03em] text-stone-950 sm:text-3xl">
               {brandName}
             </span>
           )}
@@ -117,7 +117,7 @@ export function PublicHeader() {
 
         <nav
           aria-label="Navegação principal"
-          className="hidden items-center gap-6 md:flex lg:gap-8"
+          className="hidden items-center gap-7 md:flex lg:gap-10"
         >
           {navigationItems.map(
             (item) => (
@@ -129,10 +129,10 @@ export function PublicHeader() {
                   isActive,
                 }) =>
                   [
-                    "rounded-md px-1 py-2 text-sm font-medium transition",
+                    "relative px-1 py-3 text-xs font-semibold uppercase tracking-[0.14em] transition after:absolute after:inset-x-1 after:bottom-1 after:h-px after:origin-left after:bg-stone-950 after:transition-transform",
                     isActive
-                      ? "text-stone-950 underline decoration-2 underline-offset-8"
-                      : "text-stone-600 hover:text-stone-950",
+                      ? "text-stone-950 after:scale-x-100"
+                      : "text-stone-600 after:scale-x-0 hover:text-stone-950 hover:after:scale-x-100",
                   ].join(" ")
                 }
               >
@@ -148,14 +148,14 @@ export function PublicHeader() {
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex rounded-xl bg-green-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-green-700 lg:px-5"
+              className="button-primary min-h-11 px-4 lg:px-5"
             >
               Falar pelo WhatsApp
             </a>
           ) : (
             <Link
               to="/contato"
-              className="inline-flex rounded-xl bg-stone-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-stone-700 lg:px-5"
+              className="button-primary min-h-11 px-4 lg:px-5"
             >
               Entrar em contato
             </Link>
@@ -177,7 +177,7 @@ export function PublicHeader() {
               ? "Fechar menu principal"
               : "Abrir menu principal"
           }
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-800 transition hover:bg-stone-100 md:hidden"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-stone-300 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-stone-800 hover:border-stone-950 hover:bg-stone-50 md:hidden"
         >
           {isMenuOpen
             ? "Fechar"
@@ -188,11 +188,11 @@ export function PublicHeader() {
       {isMenuOpen && (
         <div
           id="public-mobile-menu"
-          className="border-t border-stone-200 bg-white px-4 py-5 shadow-lg md:hidden"
+          className="border-t border-stone-200 bg-white px-4 py-6 shadow-float md:hidden"
         >
           <nav
             aria-label="Navegação para dispositivos móveis"
-            className="mx-auto flex max-w-7xl flex-col gap-2"
+            className="mx-auto flex max-w-7xl flex-col gap-1"
           >
             {navigationItems.map(
               (item) => (
@@ -205,7 +205,7 @@ export function PublicHeader() {
                     isActive,
                   }) =>
                     [
-                      "rounded-lg px-4 py-3 text-base font-medium transition",
+                      "rounded-md px-4 py-3 text-sm font-semibold uppercase tracking-[0.1em] transition",
                       isActive
                         ? "bg-stone-100 text-stone-950"
                         : "text-stone-700 hover:bg-stone-50",
@@ -223,7 +223,7 @@ export function PublicHeader() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={closeMenu}
-                className="mt-3 rounded-lg bg-green-600 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-green-700"
+                className="button-primary mt-4 w-full"
               >
                 Falar pelo WhatsApp
               </a>
@@ -231,7 +231,7 @@ export function PublicHeader() {
               <Link
                 to="/contato"
                 onClick={closeMenu}
-                className="mt-3 rounded-lg bg-stone-900 px-4 py-3 text-center text-sm font-semibold text-white"
+                className="button-primary mt-4 w-full"
               >
                 Entrar em contato
               </Link>

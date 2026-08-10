@@ -86,13 +86,13 @@ export function AdminLoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-stone-100 px-4 py-12">
-      <section className="w-full max-w-md rounded-2xl border border-stone-200 bg-white p-8 shadow-sm">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+    <main className="admin-surface flex min-h-screen items-center justify-center bg-stone-50 px-4 py-12">
+      <section className="w-full max-w-md rounded-lg border border-stone-200 bg-white p-7 shadow-float sm:p-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Administração
         </p>
 
-        <h1 className="mt-2 text-3xl font-semibold text-stone-950">
+        <h1 className="mt-3 text-3xl font-semibold text-stone-950">
           Entrar no painel
         </h1>
 
@@ -119,7 +119,7 @@ export function AdminLoginPage() {
               inputMode="email"
               required
               disabled={isSubmitting}
-              className="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none transition focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 disabled:cursor-not-allowed disabled:bg-stone-100"
+              className="form-control disabled:cursor-not-allowed"
             />
           </div>
 
@@ -140,7 +140,7 @@ export function AdminLoginPage() {
               autoComplete="current-password"
               required
               disabled={isSubmitting}
-              className="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none transition focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 disabled:cursor-not-allowed disabled:bg-stone-100"
+              className="form-control disabled:cursor-not-allowed"
             />
           </div>
 
@@ -156,7 +156,7 @@ export function AdminLoginPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-stone-900 px-4 py-3 font-medium text-white transition hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="button-primary w-full focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-2"
           >
             {isSubmitting ? "Entrando..." : "Entrar"}
           </button>

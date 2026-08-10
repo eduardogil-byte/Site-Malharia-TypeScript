@@ -58,36 +58,36 @@ export function ContactPage() {
   return (
     <main>
       <section className="bg-stone-950 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-300">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
             Atendimento
           </p>
 
-          <h1 className="mt-3 text-4xl font-semibold sm:text-5xl">
+          <h1 className="mt-4 text-5xl leading-none sm:text-6xl">
             Entre em contato
           </h1>
 
-          <p className="mt-6 max-w-3xl whitespace-pre-line text-lg leading-8 text-stone-300">
+          <p className="mt-7 max-w-2xl whitespace-pre-line text-lg leading-8 text-stone-300">
             {contactText}
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-28">
         {hasContactInformation ? (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-lg border border-stone-200 bg-stone-200 md:grid-cols-2">
             {whatsappUrl && (
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-green-200 bg-green-50 p-7 transition hover:-translate-y-1 hover:shadow-md"
+                className="bg-white p-7 transition hover:bg-green-50 sm:p-9"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-green-700">
                   WhatsApp
                 </p>
 
-                <h2 className="mt-3 text-2xl font-semibold text-stone-950">
+                <h2 className="mt-4 text-3xl leading-tight text-stone-950">
                   Fale diretamente conosco
                 </h2>
 
@@ -106,13 +106,13 @@ export function ContactPage() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-stone-200 bg-white p-7 transition hover:-translate-y-1 hover:shadow-md"
+                className="bg-white p-7 transition hover:bg-stone-50 sm:p-9"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
                   Instagram
                 </p>
 
-                <h2 className="mt-3 text-2xl font-semibold text-stone-950">
+                <h2 className="mt-4 text-3xl leading-tight text-stone-950">
                   {getInstagramLabel(settings?.instagram ?? null)}
                 </h2>
 
@@ -129,13 +129,13 @@ export function ContactPage() {
             {settings?.email && (
               <a
                 href={`mailto:${settings.email}`}
-                className="rounded-2xl border border-stone-200 bg-white p-7 transition hover:-translate-y-1 hover:shadow-md"
+                className="bg-white p-7 transition hover:bg-stone-50 sm:p-9"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
                   E-mail
                 </p>
 
-                <h2 className="mt-3 break-all text-xl font-semibold text-stone-950">
+                <h2 className="mt-4 break-all font-sans text-xl font-semibold tracking-normal text-stone-950">
                   {settings.email}
                 </h2>
 
@@ -146,7 +146,7 @@ export function ContactPage() {
             )}
 
             {settings?.endereco && (
-              <article className="rounded-2xl border border-stone-200 bg-white p-7">
+              <article className="bg-white p-7 sm:p-9">
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
                   Endereço
                 </p>
@@ -169,8 +169,8 @@ export function ContactPage() {
           </div>
         )}
 
-        <div className="mt-14 rounded-3xl bg-stone-100 p-8 text-center sm:p-12">
-          <h2 className="text-3xl font-semibold text-stone-950">
+        <div className="mt-16 border-y border-stone-200 bg-stone-50 p-8 text-center sm:p-14">
+          <h2 className="text-4xl text-stone-950">
             Veja também nosso catálogo
           </h2>
 
@@ -180,7 +180,7 @@ export function ContactPage() {
 
           <Link
             to="/catalogo"
-            className="mt-7 inline-flex rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white hover:bg-stone-700"
+            className="button-primary mt-8"
           >
             Abrir catálogo
           </Link>

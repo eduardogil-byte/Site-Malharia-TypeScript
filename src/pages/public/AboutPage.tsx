@@ -40,25 +40,25 @@ export function AboutPage() {
 
   return (
     <main>
-      <section className="bg-stone-100">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+      <section className="bg-stone-50">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-8 lg:py-28">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+            <p className="eyebrow">
               Nossa história
             </p>
 
-            <h1 className="mt-3 text-4xl font-semibold text-stone-950 sm:text-5xl">
+            <h1 className="mt-4 text-5xl leading-[1.02] text-stone-950 sm:text-6xl">
               Sobre a {brandName}
             </h1>
 
             {settings?.slogan && (
-              <p className="mt-5 text-xl leading-8 text-stone-600">
+              <p className="mt-6 max-w-lg text-lg leading-8 text-stone-600">
                 {settings.slogan}
               </p>
             )}
           </div>
 
-          <div className="flex min-h-72 items-center justify-center overflow-hidden rounded-3xl bg-white p-8 shadow-sm">
+          <div className="flex min-h-80 items-center justify-center overflow-hidden rounded-lg border border-stone-200 bg-white p-10 shadow-soft sm:min-h-96">
             {settings?.logoUrl ? (
               <img
                 src={settings.logoUrl}
@@ -66,7 +66,7 @@ export function AboutPage() {
                 className="max-h-56 max-w-full object-contain"
               />
             ) : (
-              <p className="text-3xl font-semibold text-stone-950">
+              <p className="font-display text-4xl tracking-[-0.03em] text-stone-950">
                 {brandName}
               </p>
             )}
@@ -74,24 +74,24 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <h2 className="text-3xl font-semibold text-stone-950">Quem somos</h2>
+      <section className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <h2 className="text-4xl text-stone-950 sm:text-5xl">Quem somos</h2>
 
-        <div className="mt-7 whitespace-pre-line text-lg leading-9 text-stone-600">
+        <div className="mt-8 whitespace-pre-line text-lg leading-9 text-stone-600">
           {aboutText}
         </div>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/catalogo"
-            className="inline-flex justify-center rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white hover:bg-stone-700"
+            className="button-primary"
           >
             Conhecer os produtos
           </Link>
 
           <Link
             to="/contato"
-            className="inline-flex justify-center rounded-xl border border-stone-300 px-6 py-4 text-sm font-semibold text-stone-800 hover:bg-stone-100"
+            className="button-secondary"
           >
             Entrar em contato
           </Link>

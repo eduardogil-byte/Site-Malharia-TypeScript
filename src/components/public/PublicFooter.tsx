@@ -19,29 +19,33 @@ export function PublicFooter() {
 
   return (
     <footer className="bg-stone-950 text-stone-300">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr] lg:px-8 lg:py-20">
         <div className="md:col-span-2 lg:col-span-1">
           {settings?.logoUrl ? (
             <img
               src={settings.logoUrl}
               alt={brandName}
-              className="h-14 w-auto max-w-48 object-contain"
+              className="h-14 w-auto max-w-52 object-contain brightness-0 invert"
             />
           ) : (
-            <p className="text-xl font-semibold text-white">{brandName}</p>
+            <p className="font-display text-3xl tracking-[-0.03em] text-white">
+              {brandName}
+            </p>
           )}
 
           {settings?.slogan && (
-            <p className="mt-4 max-w-sm text-sm leading-6 text-stone-400">
+            <p className="mt-5 max-w-sm text-sm leading-7 text-stone-400">
               {settings.slogan}
             </p>
           )}
         </div>
 
         <div>
-          <h2 className="font-semibold text-white">Navegação</h2>
+          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
+            Navegação
+          </h2>
 
-          <ul className="mt-4 space-y-3 text-sm">
+          <ul className="mt-6 space-y-3 text-sm">
             <li>
               <Link to="/" className="hover:text-white">
                 Início
@@ -69,9 +73,11 @@ export function PublicFooter() {
         </div>
 
         <div>
-          <h2 className="font-semibold text-white">Contato</h2>
+          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
+            Contato
+          </h2>
 
-          <ul className="mt-4 space-y-3 text-sm">
+          <ul className="mt-6 space-y-3 text-sm">
             {whatsappUrl && (
               <li>
                 <a
@@ -112,14 +118,16 @@ export function PublicFooter() {
         </div>
 
         <div>
-          <h2 className="font-semibold text-white">Localização</h2>
+          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
+            Localização
+          </h2>
 
           {settings?.endereco ? (
-            <p className="mt-4 whitespace-pre-line text-sm leading-6 text-stone-400">
+            <p className="mt-6 whitespace-pre-line text-sm leading-7 text-stone-400">
               {settings.endereco}
             </p>
           ) : (
-            <p className="mt-4 text-sm leading-6 text-stone-400">
+            <p className="mt-6 text-sm leading-7 text-stone-400">
               Consulte nossa localização pelos canais de contato.
             </p>
           )}
@@ -127,7 +135,7 @@ export function PublicFooter() {
       </div>
 
       <div className="border-t border-stone-800">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-xs text-stone-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-7 text-[0.7rem] uppercase tracking-[0.08em] text-stone-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
             © {currentYear} {brandName}. Todos os direitos reservados.
           </p>

@@ -23,7 +23,7 @@ export function PublicProductGallery({
 
   if (!selectedImage) {
     return (
-      <div className="flex aspect-square items-center justify-center rounded-2xl bg-stone-100 p-8 text-center text-stone-500">
+      <div className="flex aspect-[4/5] items-center justify-center rounded-lg bg-stone-100 p-8 text-center text-stone-500">
         Produto sem imagens
       </div>
     );
@@ -31,7 +31,7 @@ export function PublicProductGallery({
 
   return (
     <div>
-      <div className="aspect-square overflow-hidden rounded-2xl bg-stone-100">
+      <div className="aspect-[4/5] overflow-hidden rounded-lg bg-stone-100">
         <img
           src={selectedImage.publicUrl}
           alt={selectedImage.altText ?? productName}
@@ -40,7 +40,7 @@ export function PublicProductGallery({
       </div>
 
       {images.length > 1 && (
-        <div className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-5">
+        <div className="mt-4 grid grid-cols-5 gap-2.5 sm:grid-cols-6">
           {images.map((image) => {
             const isSelected = image.id === selectedImage.id;
 
@@ -52,9 +52,9 @@ export function PublicProductGallery({
                 aria-label={`Visualizar imagem ${image.posicao} de ${productName}`}
                 aria-pressed={isSelected}
                 className={[
-                  "aspect-square overflow-hidden rounded-lg border-2 bg-stone-100 transition",
+                  "aspect-square overflow-hidden rounded-sm border bg-stone-100 transition",
                   isSelected
-                    ? "border-stone-900 ring-2 ring-stone-900/20"
+                    ? "border-stone-900 ring-1 ring-stone-900/20"
                     : "border-transparent hover:border-stone-400",
                 ].join(" ")}
               >

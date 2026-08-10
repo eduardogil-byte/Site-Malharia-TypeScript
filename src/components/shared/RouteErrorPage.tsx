@@ -91,13 +91,13 @@ export function RouteErrorPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-stone-100 px-4 py-16">
-      <section className="w-full max-w-2xl rounded-3xl border border-stone-200 bg-white p-8 text-center shadow-sm sm:p-12">
+    <main className="flex min-h-screen items-center justify-center bg-stone-50 px-4 py-16">
+      <section className="w-full max-w-2xl rounded-lg border border-stone-200 bg-white p-8 text-center shadow-float sm:p-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
           Erro {errorInformation.status}
         </p>
 
-        <h1 className="mt-4 text-3xl font-semibold text-stone-950 sm:text-4xl">
+        <h1 className="mt-4 text-4xl font-semibold tracking-[-0.025em] text-stone-950 sm:text-5xl">
           {errorInformation.title}
         </h1>
 
@@ -120,7 +120,7 @@ export function RouteErrorPage() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             to="/"
-            className="inline-flex justify-center rounded-xl bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-stone-700"
+            className="button-primary"
           >
             Voltar ao início
           </Link>
@@ -128,7 +128,7 @@ export function RouteErrorPage() {
           <button
             type="button"
             onClick={reloadPage}
-            className="rounded-xl border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-100"
+            className="button-secondary"
           >
             Tentar novamente
           </button>

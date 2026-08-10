@@ -72,7 +72,7 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
   }, [isMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-950">
+    <div className="admin-surface min-h-screen bg-stone-50 text-stone-950">
       <SkipLink
         targetId="admin-main-content"
         label="Pular para o conteúdo administrativo"
@@ -80,10 +80,10 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
 
       <RouteFocusManager targetId="admin-main-content" />
 
-      <header className="sticky top-0 z-50 border-b border-stone-200 bg-white lg:hidden">
-        <div className="flex min-h-20 items-center justify-between gap-4 px-4 sm:px-6">
+      <header className="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur-xl lg:hidden">
+        <div className="flex min-h-[4.75rem] items-center justify-between gap-4 px-4 sm:px-6">
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
+            <p className="truncate text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
               Administração
             </p>
 
@@ -103,7 +103,7 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
                 ? "Fechar navegação administrativa"
                 : "Abrir navegação administrativa"
             }
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-800 transition hover:bg-stone-100"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-stone-300 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-stone-800 hover:border-stone-900 hover:bg-stone-50"
           >
             {isMenuOpen ? "Fechar" : "Menu"}
           </button>
@@ -112,7 +112,7 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
         {isMenuOpen && (
           <div
             id="admin-mobile-navigation"
-            className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-stone-200 bg-white px-4 py-5 shadow-lg sm:px-6"
+            className="max-h-[calc(100dvh-4.75rem)] overflow-y-auto border-t border-stone-200 bg-white px-4 py-5 shadow-float sm:px-6"
           >
             <AdminNavigation
               onNavigate={closeMenu}
@@ -124,13 +124,13 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
       </header>
 
       <div className="mx-auto min-h-screen max-w-[1600px] lg:flex">
-        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col border-r border-stone-200 bg-white p-6 lg:flex">
-          <div className="mb-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
+        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col border-r border-stone-200 bg-white p-7 lg:flex">
+          <div className="mb-10 border-b border-stone-200 pb-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
               Administração
             </p>
 
-            <p className="mt-2 text-xl font-semibold text-stone-950">
+            <p className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-stone-950">
               Painel da loja
             </p>
           </div>
@@ -147,7 +147,7 @@ export function AdminShell({ children, onLogout }: AdminShellProps) {
           <main
             id="admin-main-content"
             tabIndex={-1}
-            className="min-w-0 px-4 py-6 outline-none sm:px-6 sm:py-8 lg:px-8 xl:px-10"
+            className="min-w-0 px-4 py-7 outline-none sm:px-6 sm:py-9 lg:px-10 lg:py-10 xl:px-12"
           >
             {children}
           </main>

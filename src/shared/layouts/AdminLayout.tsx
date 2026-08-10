@@ -22,7 +22,7 @@ export function AdminLayout() {
 
   return (
     <AdminShell onLogout={handleSignOut}>
-      <div className="mb-6 flex flex-col gap-2 rounded-xl border border-stone-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-8 flex flex-col gap-2 border-b border-stone-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-medium text-stone-900">Administrador</p>
 
@@ -33,7 +33,9 @@ export function AdminLayout() {
           )}
         </div>
 
-        <p className="text-xs text-stone-500">Painel administrativo</p>
+        <p className="text-xs font-medium uppercase tracking-[0.1em] text-stone-500">
+          Painel administrativo
+        </p>
       </div>
 
       {logoutError && (

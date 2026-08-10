@@ -7,7 +7,7 @@ import { SkipLink } from "../components/SkipLink";
 
 function PublicLayoutContent() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-stone-950">
+    <div className="public-site flex min-h-screen flex-col bg-white text-stone-950">
       <SkipLink />
 
       <RouteFocusManager />

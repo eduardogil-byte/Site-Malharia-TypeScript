@@ -126,10 +126,10 @@ export function ProductPage() {
     : null;
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
       <nav
         aria-label="Navegação estrutural"
-        className="mb-8 text-sm text-stone-500"
+        className="mb-8 text-xs font-medium uppercase tracking-[0.1em] text-stone-500 lg:mb-10"
       >
         <Link to="/catalogo" className="hover:text-stone-950">
           Catálogo
@@ -144,46 +144,46 @@ export function ProductPage() {
         )}
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)] lg:gap-16 xl:gap-24">
         <PublicProductGallery
           productName={product.nome}
           images={product.imagens}
         />
 
-        <section>
+        <section className="lg:sticky lg:top-32 lg:self-start">
           {product.categoria && (
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+            <p className="eyebrow">
               {product.categoria.nome}
             </p>
           )}
 
-          <h1 className="mt-3 text-4xl font-semibold leading-tight text-stone-950">
+          <h1 className="mt-4 text-5xl leading-[1.02] text-stone-950 sm:text-6xl">
             {product.nome}
           </h1>
 
           {!product.disponivel && (
-            <span className="mt-5 inline-flex rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800">
+            <span className="mt-6 inline-flex rounded-sm bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800">
               Temporariamente indisponível
             </span>
           )}
 
           {product.descricaoCurta && (
-            <p className="mt-6 text-lg leading-8 text-stone-600">
+            <p className="mt-7 text-lg leading-8 text-stone-600">
               {product.descricaoCurta}
             </p>
           )}
 
           {attributes.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-lg font-semibold text-stone-950">
+              <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-stone-950">
                 Características
               </h2>
 
-              <dl className="mt-4 divide-y divide-stone-200 rounded-xl border border-stone-200">
+              <dl className="mt-4 divide-y divide-stone-200 border-y border-stone-200">
                 {attributes.map((attribute) => (
                   <div
                     key={attribute.name}
-                    className="grid grid-cols-2 gap-4 px-4 py-3"
+                    className="grid grid-cols-2 gap-4 py-3.5"
                   >
                     <dt className="text-sm font-medium text-stone-700">
                       {attribute.name}
@@ -203,7 +203,7 @@ export function ProductPage() {
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-8 flex w-full items-center justify-center rounded-xl bg-green-600 px-6 py-4 font-semibold text-white transition hover:bg-green-700"
+              className="button-primary mt-9 flex w-full"
             >
               Consultar pelo WhatsApp
             </a>
@@ -218,12 +218,12 @@ export function ProductPage() {
       </div>
 
       {product.descricao && (
-        <section className="mt-16 max-w-4xl">
-          <h2 className="text-2xl font-semibold text-stone-950">
+        <section className="mt-16 max-w-4xl border-t border-stone-200 pt-12 lg:mt-24 lg:pt-16">
+          <h2 className="text-3xl text-stone-950 sm:text-4xl">
             Sobre este produto
           </h2>
 
-          <p className="mt-5 whitespace-pre-line text-base leading-8 text-stone-600">
+          <p className="mt-6 whitespace-pre-line text-base leading-8 text-stone-600">
             {product.descricao}
           </p>
         </section>
