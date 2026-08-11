@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { PublicProductCard } from "../../catalog/components/PublicProductCard";
 import type { PublicHomeSection as PublicHomeSectionType } from "../types/publicHome";
+import { PublicProductCarousel } from "./PublicProductCarousel";
 
 type PublicHomeSectionProps = {
   section: PublicHomeSectionType;
@@ -43,11 +43,10 @@ export function PublicHomeSection({
           </Link>
         </header>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
-          {section.produtos.map((product) => (
-            <PublicProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <PublicProductCarousel
+          label={section.titulo}
+          products={section.produtos}
+        />
       </div>
     </section>
   );
