@@ -255,9 +255,9 @@ export function PublicProductCarousel({
       aria-roledescription="carrossel"
       aria-label={`Produtos de ${label}`}
     >
-      <div className="relative lg:mx-14">
+      <div className="relative">
         {hasOverflow && (
-          <div className="pointer-events-none absolute inset-x-[-3.5rem] top-1/2 z-10 hidden -translate-y-1/2 items-center justify-between lg:flex">
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-between lg:flex">
             <button
               type="button"
               onClick={() => scrollToPage(currentPage - 1)}
@@ -295,12 +295,12 @@ export function PublicProductCarousel({
               dragRef.current.hasMoved = false;
             }
           }}
-          className="-mx-4 flex cursor-grab snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 overscroll-x-contain active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:gap-6 sm:px-6 lg:mx-0 lg:px-0 xl:gap-7"
+          className="-mx-4 flex cursor-grab snap-x snap-proximity gap-3 overflow-x-auto px-4 pb-4 overscroll-x-contain active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:gap-5 sm:px-6 lg:mx-14 lg:px-0 xl:gap-6"
         >
           {products.map((product) => (
             <li
               key={product.id}
-              className="h-auto min-w-0 shrink-0 basis-[calc(40%_-_0.8rem)] snap-start sm:basis-[calc(40%_-_1.2rem)] lg:basis-[calc(33.333%_-_1rem)] xl:basis-[calc(25%_-_1.3125rem)]"
+              className="h-auto min-w-0 shrink-0 basis-[calc(40%_-_0.6rem)] snap-start sm:basis-[calc(40%_-_1rem)] lg:basis-[calc(33.333%_-_0.8333rem)] xl:basis-[calc(25%_-_1.125rem)]"
             >
               <PublicProductCard product={product} />
             </li>

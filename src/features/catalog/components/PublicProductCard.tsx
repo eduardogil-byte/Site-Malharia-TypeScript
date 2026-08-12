@@ -9,13 +9,13 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
   const coverImage = product.imagens[0];
 
   return (
-    <article className="group h-full bg-transparent shadow-lg  p-3">
+    <article className="group h-full rounded-xl bg-transparent transition-transform duration-300 hover:-translate-y-1">
       <Link
         to={`/produto/${product.slug}`}
         aria-label={`Ver detalhes do produto ${product.nome}`}
-        className="block h-full rounded-sm"
+        className="block h-full rounded-lg"
       >
-        <div className="aspect-[4/5] overflow-hidden bg-stone-100 ">
+        <div className="aspect-[4/5] overflow-hidden bg-stone-100">
           {coverImage ? (
             <img
               src={coverImage.publicUrl}
@@ -30,7 +30,7 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
           )}
         </div>
 
-        <div className="flex min-h-44 flex-col pb-1 pt-4 sm:min-h-48">
+        <div className="flex min-h-44 flex-col px-3 pb-2 pt-4 sm:min-h-48">
           {product.categoria && (
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-stone-500">
               {product.categoria.nome}
@@ -53,7 +53,7 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
             </span>
           )}
 
-          <span className="mt-auto block pt-5 text-xs font-semibold uppercase tracking-[0.12em] text-stone-700 group-hover:text-stone-950">
+          <span className="-mx-3 mt-auto block w-[calc(100%+1.5rem)] rounded-md bg-stone-900 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-white transition-colors group-hover:bg-stone-700">
             Ver detalhes <span aria-hidden="true">→</span>
           </span>
         </div>
