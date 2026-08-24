@@ -75,4 +75,17 @@ describe("PublicProductCard", () => {
 
     expect(screen.getByText(/indisponível/i)).toBeInTheDocument();
   });
+
+  it("apresenta um placeholder intencional quando não há imagem", () => {
+    renderWithRouter(
+      <PublicProductCard
+        product={{
+          ...availableProduct,
+          imagens: [],
+        }}
+      />,
+    );
+
+    expect(screen.getByText("Imagem em breve")).toBeInTheDocument();
+  });
 });

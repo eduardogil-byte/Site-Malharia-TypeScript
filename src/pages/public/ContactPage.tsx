@@ -14,7 +14,7 @@ export function ContactPage() {
 
   if (isLoading) {
     return (
-      <main className="mx-auto max-w-7xl px-4 py-20 text-center text-stone-600 sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing text-center text-stone-600">
         Carregando contatos...
       </main>
     );
@@ -22,7 +22,7 @@ export function ContactPage() {
 
   if (loadError) {
     return (
-      <main className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing max-w-4xl text-center">
         <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
           <p className="text-red-800">{loadError}</p>
 
@@ -58,22 +58,22 @@ export function ContactPage() {
   return (
     <main>
       <section className="bg-stone-950 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="content-shell section-spacing">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
             Atendimento
           </p>
 
-          <h1 className="mt-4 text-5xl leading-none sm:text-6xl">
+          <h1 className="mt-4 text-4xl leading-[1.04] sm:text-5xl lg:text-6xl">
             Entre em contato
           </h1>
 
-          <p className="mt-7 max-w-2xl whitespace-pre-line text-lg leading-8 text-stone-300">
+          <p className="mt-5 max-w-2xl whitespace-pre-line text-base leading-7 text-stone-300 sm:text-lg sm:leading-8">
             {contactText}
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-28">
+      <section className="content-shell section-spacing">
         {hasContactInformation ? (
           <div className="grid gap-px overflow-hidden rounded-lg border border-stone-200 bg-stone-200 md:grid-cols-2">
             {whatsappUrl && (
@@ -81,9 +81,9 @@ export function ContactPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white p-7 transition hover:bg-green-50 sm:p-9"
+                className="bg-white p-7 transition-colors hover:bg-stone-50 sm:p-9"
               >
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-green-700">
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-600">
                   WhatsApp
                 </p>
 
@@ -95,7 +95,7 @@ export function ContactPage() {
                   Consulte produtos, disponibilidade e outras informações.
                 </p>
 
-                <span className="mt-6 inline-flex font-semibold text-green-700">
+                <span className="mt-6 inline-flex font-semibold text-stone-900">
                   Iniciar conversa →
                 </span>
               </a>
@@ -106,7 +106,7 @@ export function ContactPage() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white p-7 transition hover:bg-stone-50 sm:p-9"
+                className="bg-white p-7 transition-colors hover:bg-stone-50 sm:p-9"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-stone-500">
                   Instagram
@@ -169,8 +169,8 @@ export function ContactPage() {
           </div>
         )}
 
-        <div className="mt-16 border-y border-stone-200 bg-stone-50 p-8 text-center sm:p-14">
-          <h2 className="text-4xl text-stone-950">
+        <div className="mt-14 border-y border-stone-200 bg-stone-50 p-8 text-center sm:mt-16 sm:p-12">
+          <h2 className="section-title">
             Veja também nosso catálogo
           </h2>
 

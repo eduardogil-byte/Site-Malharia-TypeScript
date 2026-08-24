@@ -10,7 +10,7 @@ export function AboutPage() {
 
   if (isLoading) {
     return (
-      <main className="mx-auto max-w-7xl px-4 py-20 text-center text-stone-600 sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing text-center text-stone-600">
         Carregando informações...
       </main>
     );
@@ -18,7 +18,7 @@ export function AboutPage() {
 
   if (loadError) {
     return (
-      <main className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing max-w-4xl text-center">
         <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
           <p className="text-red-800">{loadError}</p>
 
@@ -40,25 +40,25 @@ export function AboutPage() {
 
   return (
     <main>
-      <section className="bg-stone-50">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-8 lg:py-28">
+      <section className="bg-stone-100/55">
+        <div className="content-shell section-spacing grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <p className="eyebrow">
               Nossa história
             </p>
 
-            <h1 className="mt-4 text-5xl leading-[1.02] text-stone-950 sm:text-6xl">
+            <h1 className="page-title">
               Sobre a {brandName}
             </h1>
 
             {settings?.slogan && (
-              <p className="mt-6 max-w-lg text-lg leading-8 text-stone-600">
+              <p className="lead-copy mt-5 max-w-lg">
                 {settings.slogan}
               </p>
             )}
           </div>
 
-          <div className="flex min-h-80 items-center justify-center overflow-hidden rounded-lg border border-stone-200 bg-white p-10 shadow-soft sm:min-h-96">
+          <div className="flex min-h-64 items-center justify-center overflow-hidden rounded-lg border border-stone-200 bg-white p-8 shadow-soft sm:min-h-80 sm:p-10">
             {settings?.logoUrl ? (
               <img
                 src={settings.logoUrl}
@@ -74,10 +74,10 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <h2 className="text-4xl text-stone-950 sm:text-5xl">Quem somos</h2>
+      <section className="content-shell section-spacing max-w-4xl">
+        <h2 className="section-title">Quem somos</h2>
 
-        <div className="mt-8 whitespace-pre-line text-lg leading-9 text-stone-600">
+        <div className="mt-6 whitespace-pre-line text-base leading-8 text-stone-600 sm:text-lg sm:leading-9">
           {aboutText}
         </div>
 

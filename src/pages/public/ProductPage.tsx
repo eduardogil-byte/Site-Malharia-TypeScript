@@ -74,7 +74,7 @@ export function ProductPage() {
 
   if (isLoading) {
     return (
-      <main className="mx-auto max-w-7xl px-4 py-16 text-center text-stone-600 sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing text-center text-stone-600">
         Carregando produto...
       </main>
     );
@@ -82,12 +82,12 @@ export function ProductPage() {
 
   if (loadError) {
     return (
-      <main className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
+      <main className="content-shell section-spacing max-w-4xl text-center">
         <p className="text-red-700">{loadError}</p>
 
         <Link
           to="/catalogo"
-          className="mt-6 inline-flex rounded-lg bg-stone-900 px-5 py-3 text-sm font-medium text-white"
+          className="button-primary mt-6"
         >
           Voltar ao catálogo
         </Link>
@@ -97,8 +97,8 @@ export function ProductPage() {
 
   if (!product) {
     return (
-      <main className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-semibold text-stone-950">
+      <main className="content-shell section-spacing max-w-4xl text-center">
+        <h1 className="section-title">
           Produto não encontrado
         </h1>
 
@@ -108,7 +108,7 @@ export function ProductPage() {
 
         <Link
           to="/catalogo"
-          className="mt-6 inline-flex rounded-lg bg-stone-900 px-5 py-3 text-sm font-medium text-white"
+          className="button-primary mt-6"
         >
           Voltar ao catálogo
         </Link>
@@ -126,7 +126,7 @@ export function ProductPage() {
     : null;
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+    <main className="content-shell py-10 sm:py-14 lg:py-16">
       <nav
         aria-label="Navegação estrutural"
         className="mb-8 text-xs font-medium uppercase tracking-[0.1em] text-stone-500 lg:mb-10"
@@ -144,7 +144,7 @@ export function ProductPage() {
         )}
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)] lg:gap-16 xl:gap-24">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(340px,0.92fr)] lg:gap-14 xl:gap-20">
         <PublicProductGallery
           productName={product.nome}
           images={product.imagens}
@@ -157,7 +157,7 @@ export function ProductPage() {
             </p>
           )}
 
-          <h1 className="mt-4 text-5xl leading-[1.02] text-stone-950 sm:text-6xl">
+          <h1 className="page-title">
             {product.nome}
           </h1>
 
@@ -168,7 +168,7 @@ export function ProductPage() {
           )}
 
           {product.descricaoCurta && (
-            <p className="mt-7 text-lg leading-8 text-stone-600">
+            <p className="lead-copy mt-6">
               {product.descricaoCurta}
             </p>
           )}
@@ -218,8 +218,8 @@ export function ProductPage() {
       </div>
 
       {product.descricao && (
-        <section className="mt-16 max-w-4xl border-t border-stone-200 pt-12 lg:mt-24 lg:pt-16">
-          <h2 className="text-3xl text-stone-950 sm:text-4xl">
+        <section className="mt-16 max-w-4xl border-t border-stone-200 pt-12 lg:mt-20 lg:pt-16">
+          <h2 className="section-title">
             Sobre este produto
           </h2>
 

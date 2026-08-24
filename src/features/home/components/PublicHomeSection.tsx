@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { PublicProductCard } from "../../catalog/components/PublicProductCard";
 import type { PublicHomeSection as PublicHomeSectionType } from "../types/publicHome";
 import { PublicProductCarousel } from "./PublicProductCarousel";
 
@@ -11,22 +12,24 @@ export function PublicHomeSection({
   section,
   mutedBackground = false,
 }: PublicHomeSectionProps) {
+  const productCount = section.produtos.length;
+
   return (
     <section
       id={section.slug}
-      className={mutedBackground ? "bg-stone-50" : "bg-white"}
+      className={mutedBackground ? "bg-stone-100/55" : "bg-white"}
     >
-      <div className="mx-auto max-w-[84.5rem] px-4 py-20 sm:px-6 lg:px-8 lg:py-12">
-        <header className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+      <div className="content-shell section-spacing">
+        <header className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <p className="eyebrow">Seleção especial</p>
 
-            <h2 className="mt-3 text-4xl leading-tight text-stone-950 sm:text-5xl">
+            <h2 className="section-title mt-3">
               {section.titulo}
             </h2>
 
             {section.subtitulo && (
-              <p className="mt-5 text-base leading-7 text-stone-600 sm:text-lg">
+              <p className="lead-copy mt-4">
                 {section.subtitulo}
               </p>
             )}
@@ -43,10 +46,24 @@ export function PublicHomeSection({
           </Link>
         </header>
 
-        <PublicProductCarousel
-          label={section.titulo}
-          products={section.produtos}
-        />
+        {productCount > 1 ? (
+          <PublicProductCarousel
+            label={section.titulo}
+            products={section.produtos}
+            useDesktopGrid={productCount <= 4}
+          />
+        ) : (
+          <ul
+            aria-label={`Produtos de ${section.titulo}`}
+            className="mt-8 grid max-w-[19rem] grid-cols-1 sm:mt-10"
+          >
+            {section.produtos.map((product) => (
+              <li key={product.id} className="min-w-0">
+                <PublicProductCard product={product} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

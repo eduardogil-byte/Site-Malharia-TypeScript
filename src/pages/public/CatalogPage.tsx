@@ -33,17 +33,17 @@ export function CatalogPage() {
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <section className="content-shell section-spacing">
       <header className="max-w-3xl">
         <p className="eyebrow">
           Nossos produtos
         </p>
 
-        <h1 className="mt-3 text-5xl leading-none text-stone-950 sm:text-6xl">
+        <h1 className="page-title">
           Catálogo
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg sm:leading-8">
+        <p className="lead-copy mt-5 max-w-2xl">
           Conheça nossas malhas e produtos artesanais. Consulte os detalhes e a
           disponibilidade pelo WhatsApp.
         </p>
@@ -51,7 +51,7 @@ export function CatalogPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-12 border-y border-stone-200 bg-stone-50/60 py-6"
+        className="mt-10 border-y border-stone-200 bg-stone-50/70 py-6 sm:mt-12"
       >
         <div className="grid gap-5 md:grid-cols-[1fr_240px_auto]">
           <div>
@@ -125,7 +125,7 @@ export function CatalogPage() {
         </div>
       </form>
 
-      <div className="mt-12">
+      <div className="mt-10 sm:mt-12">
         {isLoading && (
           <div
             className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600"
@@ -170,7 +170,7 @@ export function CatalogPage() {
                 : "produtos encontrados"}
             </p>
 
-            <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
+            <div className="grid grid-cols-1 gap-x-5 gap-y-10 min-[480px]:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
               {products.map((product) => (
                 <PublicProductCard key={product.id} product={product} />
               ))}

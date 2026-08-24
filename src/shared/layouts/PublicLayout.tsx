@@ -7,7 +7,7 @@ import { SkipLink } from "../components/SkipLink";
 
 function PublicLayoutContent() {
   return (
-    <div className="public-site flex min-h-screen flex-col bg-white text-stone-950">
+    <div className="public-site flex min-h-screen min-w-0 flex-col overflow-x-clip text-stone-950">
       <SkipLink />
 
       <RouteFocusManager />
@@ -17,7 +17,7 @@ function PublicLayoutContent() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex-1 outline-none"
+        className="min-w-0 flex-1 outline-none"
       >
         <Outlet />
       </main>

@@ -19,13 +19,13 @@ export function PublicFooter() {
 
   return (
     <footer className="bg-stone-950 text-stone-300">
-      <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr] lg:px-8 lg:py-20">
-        <div className="md:col-span-2 lg:col-span-1">
+      <div className="content-shell grid gap-x-10 gap-y-8 py-12 sm:py-14 md:grid-cols-3 lg:grid-cols-[1.35fr_0.8fr_1fr_1fr] lg:py-16">
+        <div className="md:col-span-3 lg:col-span-1">
           {settings?.logoUrl ? (
             <img
               src={settings.logoUrl}
               alt={brandName}
-              className="h-14 w-auto max-w-52 object-contain brightness-0 invert"
+              className="h-16 w-auto max-w-60 object-contain object-left invert mix-blend-screen"
             />
           ) : (
             <p className="font-display text-3xl tracking-[-0.03em] text-white">
@@ -34,57 +34,57 @@ export function PublicFooter() {
           )}
 
           {settings?.slogan && (
-            <p className="mt-5 max-w-sm text-sm leading-7 text-stone-400">
+            <p className="mt-4 max-w-sm text-sm leading-6 text-stone-400">
               {settings.slogan}
             </p>
           )}
         </div>
 
-        <div>
+        <div className="border-t border-stone-800 pt-6 md:border-0 md:pt-0">
           <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
             Navegação
           </h2>
 
-          <ul className="mt-6 space-y-3 text-sm">
+          <ul className="mt-4 space-y-1 text-sm">
             <li>
-              <Link to="/" className="hover:text-white">
+              <Link to="/" className="inline-flex min-h-9 items-center text-stone-400 hover:text-white">
                 Início
               </Link>
             </li>
 
             <li>
-              <Link to="/catalogo" className="hover:text-white">
+              <Link to="/catalogo" className="inline-flex min-h-9 items-center text-stone-400 hover:text-white">
                 Catálogo
               </Link>
             </li>
 
             <li>
-              <Link to="/sobre" className="hover:text-white">
+              <Link to="/sobre" className="inline-flex min-h-9 items-center text-stone-400 hover:text-white">
                 Sobre
               </Link>
             </li>
 
             <li>
-              <Link to="/contato" className="hover:text-white">
+              <Link to="/contato" className="inline-flex min-h-9 items-center text-stone-400 hover:text-white">
                 Contato
               </Link>
             </li>
           </ul>
         </div>
 
-        <div>
+        <div className="border-t border-stone-800 pt-6 md:border-0 md:pt-0">
           <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
             Contato
           </h2>
 
-          <ul className="mt-6 space-y-3 text-sm">
+          <ul className="mt-4 space-y-1 text-sm">
             {whatsappUrl && (
               <li>
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white"
+                  className="inline-flex min-h-9 items-center text-stone-400 hover:text-white"
                 >
                   WhatsApp
                 </a>
@@ -97,7 +97,7 @@ export function PublicFooter() {
                   href={instagramUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white"
+                  className="inline-flex min-h-9 items-center text-stone-400 hover:text-white"
                 >
                   {getInstagramLabel(settings?.instagram ?? null)}
                 </a>
@@ -108,7 +108,7 @@ export function PublicFooter() {
               <li>
                 <a
                   href={`mailto:${settings.email}`}
-                  className="break-all hover:text-white"
+                  className="inline-flex min-h-9 max-w-full items-center break-all text-stone-400 hover:text-white"
                 >
                   {settings.email}
                 </a>
@@ -117,17 +117,17 @@ export function PublicFooter() {
           </ul>
         </div>
 
-        <div>
+        <div className="border-t border-stone-800 pt-6 md:border-0 md:pt-0">
           <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-white">
             Localização
           </h2>
 
           {settings?.endereco ? (
-            <p className="mt-6 whitespace-pre-line text-sm leading-7 text-stone-400">
+            <p className="mt-4 whitespace-pre-line text-sm leading-6 text-stone-400">
               {settings.endereco}
             </p>
           ) : (
-            <p className="mt-6 text-sm leading-7 text-stone-400">
+            <p className="mt-4 text-sm leading-6 text-stone-400">
               Consulte nossa localização pelos canais de contato.
             </p>
           )}
@@ -135,7 +135,7 @@ export function PublicFooter() {
       </div>
 
       <div className="border-t border-stone-800">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-7 text-[0.7rem] uppercase tracking-[0.08em] text-stone-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div className="content-shell flex flex-col gap-1.5 py-5 text-[0.7rem] uppercase tracking-[0.08em] text-stone-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {currentYear} {brandName}. Todos os direitos reservados.
           </p>

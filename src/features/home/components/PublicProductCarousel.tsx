@@ -11,10 +11,12 @@ import type { PublicProduct } from "../../catalog/types/publicCatalog";
 type PublicProductCarouselProps = {
   label: string;
   products: PublicProduct[];
+  useDesktopGrid?: boolean;
 };
 
 const SCROLL_EDGE_TOLERANCE = 2;
 const DRAG_THRESHOLD = 6;
+const DRAG_ADVANCE_THRESHOLD = 48;
 const SNAP_RESTORE_DELAY = 400;
 
 function getPagePositions(track: HTMLUListElement) {
@@ -83,12 +85,14 @@ function ArrowIcon({ direction }: { direction: "previous" | "next" }) {
 export function PublicProductCarousel({
   label,
   products,
+  useDesktopGrid = false,
 }: PublicProductCarouselProps) {
   const trackRef = useRef<HTMLUListElement>(null);
   const dragRef = useRef({
     pointerId: null as number | null,
     startX: 0,
     startScrollLeft: 0,
+    distance: 0,
     hasMoved: false,
   });
   const snapRestoreTimeoutRef = useRef<number | null>(null);
@@ -170,6 +174,7 @@ export function PublicProductCarousel({
       pointerId: event.pointerId,
       startX: event.clientX,
       startScrollLeft: event.currentTarget.scrollLeft,
+      distance: 0,
       hasMoved: false,
     };
 
@@ -189,6 +194,8 @@ export function PublicProductCarousel({
     }
 
     const distance = event.clientX - drag.startX;
+
+    drag.distance = distance;
 
     if (Math.abs(distance) >= DRAG_THRESHOLD) {
       if (!drag.hasMoved) {
@@ -225,13 +232,21 @@ export function PublicProductCarousel({
       const slidePositions = slides.map((slide) =>
         Math.min(slide.offsetLeft - firstSlideLeft, maximumScrollLeft),
       );
-      const nearestSlide = getNearestPage(
+      const startingSlide = getNearestPage(
         slidePositions,
-        event.currentTarget.scrollLeft,
+        drag.startScrollLeft,
+      );
+      const slideDirection =
+        Math.abs(drag.distance) >= DRAG_ADVANCE_THRESHOLD
+          ? Math.sign(-drag.distance)
+          : 0;
+      const targetSlide = Math.max(
+        0,
+        Math.min(startingSlide + slideDirection, slidePositions.length - 1),
       );
 
       event.currentTarget.scrollTo({
-        left: slidePositions[nearestSlide],
+        left: slidePositions[targetSlide],
         behavior: "smooth",
       });
 
@@ -248,15 +263,26 @@ export function PublicProductCarousel({
 
   const hasOverflow = canScrollPrevious || canScrollNext;
 
+  const desktopGridClassName =
+    products.length === 2
+      ? "md:max-w-[40rem] md:grid-cols-2"
+      : products.length === 3
+        ? "md:max-w-[61rem] md:grid-cols-2 lg:grid-cols-3"
+        : "md:grid-cols-2 lg:grid-cols-4";
+
+  const trackLayoutClassName = useDesktopGrid
+    ? `md:mx-0 md:grid md:cursor-auto md:gap-x-6 md:gap-y-10 md:overflow-visible md:px-0 md:pb-0 md:snap-none md:active:cursor-auto ${desktopGridClassName}`
+    : "lg:mx-14 lg:px-0 xl:gap-6";
+
   return (
     <div
-      className="relative mt-12"
+      className="relative mt-8 sm:mt-10"
       role="region"
       aria-roledescription="carrossel"
       aria-label={`Produtos de ${label}`}
     >
       <div className="relative">
-        {hasOverflow && (
+        {hasOverflow && !useDesktopGrid && (
           <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-between lg:flex">
             <button
               type="button"
@@ -295,12 +321,17 @@ export function PublicProductCarousel({
               dragRef.current.hasMoved = false;
             }
           }}
-          className="-mx-4 flex cursor-grab snap-x snap-proximity gap-3 overflow-x-auto px-4 pb-4 overscroll-x-contain active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:gap-5 sm:px-6 lg:mx-14 lg:px-0 xl:gap-6"
+          className={`-mx-5 flex cursor-grab scroll-smooth snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 overscroll-x-contain active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:gap-5 sm:px-8 sm:snap-proximity ${trackLayoutClassName}`}
         >
           {products.map((product) => (
             <li
               key={product.id}
-              className="h-auto min-w-0 shrink-0 basis-[calc(40%_-_0.6rem)] snap-start sm:basis-[calc(40%_-_1rem)] lg:basis-[calc(33.333%_-_0.8333rem)] xl:basis-[calc(25%_-_1.125rem)]"
+              className={[
+                "h-auto min-w-0 shrink-0 basis-[87%] snap-start",
+                useDesktopGrid
+                  ? "sm:basis-[calc(50%_-_0.625rem)] md:basis-auto md:shrink md:snap-none"
+                  : "sm:basis-[calc(50%_-_0.625rem)] md:basis-[calc(40%_-_0.75rem)] lg:basis-[calc(33.333%_-_0.8333rem)] xl:basis-[calc(25%_-_1.125rem)]",
+              ].join(" ")}
             >
               <PublicProductCard product={product} />
             </li>
@@ -310,7 +341,7 @@ export function PublicProductCarousel({
 
       {pageCount > 1 && (
         <div
-          className="mt-2 flex justify-center"
+          className={useDesktopGrid ? "mt-2 flex justify-center md:hidden" : "mt-2 flex justify-center"}
           role="group"
           aria-label={`Navegação dos produtos de ${label}`}
         >

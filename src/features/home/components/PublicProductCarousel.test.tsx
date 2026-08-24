@@ -175,11 +175,11 @@ describe("PublicProductCarousel", () => {
     fireEvent.pointerMove(track, {
       pointerId: 1,
       pointerType: "mouse",
-      clientX: 300,
+      clientX: 440,
     });
 
     expect(setPointerCapture).toHaveBeenCalledWith(1);
-    expect(track.scrollLeft).toBe(200);
+    expect(track.scrollLeft).toBe(60);
 
     fireEvent.pointerUp(track, {
       pointerId: 1,

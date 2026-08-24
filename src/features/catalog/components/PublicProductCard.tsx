@@ -9,13 +9,13 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
   const coverImage = product.imagens[0];
 
   return (
-    <article className="group h-full rounded-xl bg-transparent transition-transform duration-300 hover:-translate-y-1">
+    <article className="group h-full bg-transparent transition-transform duration-300 hover:-translate-y-0.5">
       <Link
         to={`/produto/${product.slug}`}
         aria-label={`Ver detalhes do produto ${product.nome}`}
-        className="block h-full rounded-lg"
+        className="flex h-full flex-col rounded-sm"
       >
-        <div className="aspect-[4/5] overflow-hidden bg-stone-100">
+        <div className="aspect-[4/5] overflow-hidden rounded-sm border border-stone-200 bg-stone-100">
           {coverImage ? (
             <img
               src={coverImage.publicUrl}
@@ -24,15 +24,19 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
               className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.025]"
             />
           ) : (
-            <div className="flex h-full items-center justify-center p-6 text-center text-sm text-stone-500">
-              Produto sem imagem
+            <div className="flex h-full flex-col items-center justify-center bg-gradient-to-br from-stone-50 to-stone-200/70 p-6 text-center">
+              <span aria-hidden="true" className="mb-4 h-px w-10 bg-stone-300" />
+
+              <span className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-stone-500">
+                Imagem em breve
+              </span>
             </div>
           )}
         </div>
 
-        <div className="flex min-h-44 flex-col px-3 pb-2 pt-4 sm:min-h-48">
+        <div className="flex flex-1 flex-col px-1 pb-1 pt-4">
           {product.categoria && (
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-stone-500">
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-stone-500">
               {product.categoria.nome}
             </p>
           )}
@@ -53,8 +57,17 @@ export function PublicProductCard({ product }: PublicProductCardProps) {
             </span>
           )}
 
-          <span className="-mx-3 mt-auto block w-[calc(100%+1.5rem)] rounded-md bg-stone-900 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-white transition-colors group-hover:bg-stone-700">
-            Ver detalhes <span aria-hidden="true">→</span>
+          <span className="mt-auto inline-flex min-h-11 items-center gap-2 self-start pt-4 text-sm font-semibold text-stone-700 transition-colors group-hover:text-stone-950">
+            <span className="border-b border-stone-300 pb-0.5 group-hover:border-stone-700">
+              Ver detalhes
+            </span>
+
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-200 group-hover:translate-x-0.5"
+            >
+              →
+            </span>
           </span>
         </div>
       </Link>

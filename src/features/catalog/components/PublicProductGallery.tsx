@@ -23,7 +23,7 @@ export function PublicProductGallery({
 
   if (!selectedImage) {
     return (
-      <div className="flex aspect-[4/5] items-center justify-center rounded-lg bg-stone-100 p-8 text-center text-stone-500">
+      <div className="flex aspect-[4/5] items-center justify-center rounded-lg border border-stone-200 bg-stone-100 p-8 text-center text-stone-500">
         Produto sem imagens
       </div>
     );
@@ -31,7 +31,7 @@ export function PublicProductGallery({
 
   return (
     <div>
-      <div className="aspect-[4/5] overflow-hidden rounded-lg bg-stone-100">
+      <div className="aspect-[4/5] overflow-hidden rounded-lg border border-stone-200 bg-stone-100">
         <img
           src={selectedImage.publicUrl}
           alt={selectedImage.altText ?? productName}
