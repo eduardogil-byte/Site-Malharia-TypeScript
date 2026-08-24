@@ -33,15 +33,17 @@ export function CatalogPage() {
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <header className="max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <header className="max-w-3xl">
+        <p className="eyebrow">
           Nossos produtos
         </p>
 
-        <h1 className="mt-2 text-4xl font-semibold text-stone-950">Catálogo</h1>
+        <h1 className="mt-3 text-5xl leading-none text-stone-950 sm:text-6xl">
+          Catálogo
+        </h1>
 
-        <p className="mt-4 text-lg leading-8 text-stone-600">
+        <p className="mt-6 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg sm:leading-8">
           Conheça nossas malhas e produtos artesanais. Consulte os detalhes e a
           disponibilidade pelo WhatsApp.
         </p>
@@ -49,9 +51,9 @@ export function CatalogPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-10 rounded-2xl border border-stone-200 bg-white p-5"
+        className="mt-12 border-y border-stone-200 bg-stone-50/60 py-6"
       >
-        <div className="grid gap-4 md:grid-cols-[1fr_240px_auto]">
+        <div className="grid gap-5 md:grid-cols-[1fr_240px_auto]">
           <div>
             <label
               htmlFor="catalog-search"
@@ -71,7 +73,7 @@ export function CatalogPage() {
                 }))
               }
               placeholder="Nome do produto"
-              className="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none transition focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10"
+              className="form-control"
             />
           </div>
 
@@ -92,7 +94,7 @@ export function CatalogPage() {
                   categoryId: event.target.value,
                 }))
               }
-              className="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10"
+              className="form-control"
             >
               <option value="">Todas as categorias</option>
 
@@ -107,7 +109,7 @@ export function CatalogPage() {
           <div className="flex items-end gap-2">
             <button
               type="submit"
-              className="rounded-lg bg-stone-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-stone-700"
+              className="button-primary flex-1 px-5 md:flex-none"
             >
               Filtrar
             </button>
@@ -115,7 +117,7 @@ export function CatalogPage() {
             <button
               type="button"
               onClick={clearFilters}
-              className="rounded-lg border border-stone-300 px-5 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+              className="button-secondary flex-1 px-5 md:flex-none"
             >
               Limpar
             </button>
@@ -123,7 +125,7 @@ export function CatalogPage() {
         </div>
       </form>
 
-      <div className="mt-10">
+      <div className="mt-12">
         {isLoading && (
           <div
             className="rounded-2xl border border-stone-200 bg-white p-12 text-center text-stone-600"
@@ -168,7 +170,7 @@ export function CatalogPage() {
                 : "produtos encontrados"}
             </p>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
               {products.map((product) => (
                 <PublicProductCard key={product.id} product={product} />
               ))}

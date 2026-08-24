@@ -17,20 +17,20 @@ export function AdminDashboardPage() {
   return (
     <section>
       <header>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Administração
         </p>
 
-        <h1 className="mt-2 text-3xl font-semibold text-stone-950">
+        <h1 className="mt-3 text-4xl font-semibold text-stone-950">
           Visão geral
         </h1>
       </header>
 
-      <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {dashboardItems.map((item) => (
           <article
             key={item.title}
-            className="rounded-2xl border border-stone-200 bg-white p-6"
+            className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft"
           >
             <h2 className="text-lg font-semibold text-stone-950">
               {item.title}

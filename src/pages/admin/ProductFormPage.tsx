@@ -155,11 +155,11 @@ export function ProductFormPage() {
   return (
     <section>
       <header className="mb-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Administração
         </p>
 
-        <h1 className="mt-2 text-3xl font-semibold text-stone-950">
+        <h1 className="mt-3 text-4xl font-semibold text-stone-950">
           {isEditing ? "Editar produto" : "Novo produto"}
         </h1>
       </header>

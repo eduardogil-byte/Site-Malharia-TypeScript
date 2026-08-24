@@ -24,8 +24,8 @@ export function HomePage() {
     <main>
       <section
         className={[
-          "relative overflow-hidden bg-stone-950 bg-cover bg-center text-white",
-          settings?.bannerUrl ? "min-h-[620px]" : "",
+          "relative isolate overflow-hidden bg-stone-950 bg-cover bg-center text-white",
+          settings?.bannerUrl ? "min-h-[min(760px,calc(100svh-5.5rem))]" : "",
         ].join(" ")}
         style={
           settings?.bannerUrl
@@ -35,35 +35,38 @@ export function HomePage() {
             : undefined
         }
       >
-        <div aria-hidden="true" className="absolute inset-0 bg-stone-950/70" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/52 to-stone-950/10"
+        />
 
         {!settings?.bannerUrl && (
-          <div aria-hidden="true" className="absolute inset-0 opacity-20">
+          <div aria-hidden="true" className="absolute inset-0 opacity-15">
             <div className="absolute -left-28 top-10 size-80 rounded-full bg-white blur-3xl" />
 
             <div className="absolute -right-32 bottom-0 size-96 rounded-full bg-stone-400 blur-3xl" />
           </div>
         )}
 
-        <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-20 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-200">
+        <div className="relative mx-auto flex min-h-[min(680px,calc(100svh-5.5rem))] max-w-7xl items-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="max-w-4xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200">
               {brandName}
             </p>
 
-            <h1 className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-5xl leading-[0.98] sm:text-6xl lg:text-7xl xl:text-[5rem]">
               {heroTitle}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-200">
+            <p className="mt-7 max-w-xl text-base leading-7 text-stone-200 sm:text-lg sm:leading-8">
               Conheça nossa seleção de malhas, sabonetes, velas, aromatizadores
               e outros produtos artesanais.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/catalogo"
-                className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-4 text-sm font-semibold text-stone-950 transition hover:bg-stone-200"
+                className="inline-flex min-h-12 items-center justify-center rounded-md bg-white px-7 py-3 text-sm font-semibold tracking-[0.02em] text-stone-950 hover:bg-stone-100"
               >
                 Ver catálogo
               </Link>
@@ -73,14 +76,14 @@ export function HomePage() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-xl bg-green-600 px-6 py-4 text-sm font-semibold text-white transition hover:bg-green-700"
+                  className="inline-flex min-h-12 items-center justify-center rounded-md border border-white/60 px-7 py-3 text-sm font-semibold tracking-[0.02em] text-white hover:border-white hover:bg-white/10"
                 >
                   Falar pelo WhatsApp
                 </a>
               ) : (
                 <Link
                   to="/contato"
-                  className="inline-flex items-center justify-center rounded-xl border border-white/40 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
+                  className="inline-flex min-h-12 items-center justify-center rounded-md border border-white/60 px-7 py-3 text-sm font-semibold tracking-[0.02em] text-white hover:border-white hover:bg-white/10"
                 >
                   Entrar em contato
                 </Link>
@@ -93,7 +96,7 @@ export function HomePage() {
       {isLoading && (
         <section
           aria-live="polite"
-          className="mx-auto max-w-7xl px-4 py-20 text-center text-stone-600 sm:px-6 lg:px-8"
+          className="mx-auto max-w-7xl px-4 py-24 text-center text-stone-600 sm:px-6 lg:px-8"
         >
           Carregando produtos em destaque...
         </section>
@@ -127,7 +130,7 @@ export function HomePage() {
 
       {!isLoading && !loadError && sections.length === 0 && (
         <section className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-semibold text-stone-950">
+          <h2 className="text-4xl text-stone-950">
             Nosso catálogo está sendo preparado
           </h2>
 
@@ -135,27 +138,24 @@ export function HomePage() {
             Em breve novos produtos estarão disponíveis nesta página.
           </p>
 
-          <Link
-            to="/catalogo"
-            className="mt-7 inline-flex rounded-xl bg-stone-900 px-6 py-4 text-sm font-semibold text-white hover:bg-stone-700"
-          >
+          <Link to="/catalogo" className="button-primary mt-8">
             Acessar catálogo
           </Link>
         </section>
       )}
 
-      <section className="bg-stone-900 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+      <section className="bg-stone-950 text-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:px-8 lg:py-24">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">
               Encontrou algo especial?
             </p>
 
-            <h2 className="mt-3 text-3xl font-semibold">
+            <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
               Consulte disponibilidade e detalhes dos produtos.
             </h2>
 
-            <p className="mt-4 leading-7 text-stone-300">
+            <p className="mt-5 max-w-xl leading-7 text-stone-400">
               Entre em contato para tirar dúvidas sobre tecidos, medidas,
               aromas, materiais e opções disponíveis.
             </p>
@@ -166,14 +166,14 @@ export function HomePage() {
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex shrink-0 rounded-xl bg-green-600 px-6 py-4 text-sm font-semibold text-white hover:bg-green-700"
+              className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-md bg-white px-7 py-3 text-sm font-semibold text-stone-950 hover:bg-stone-100"
             >
               Falar pelo WhatsApp
             </a>
           ) : (
             <Link
               to="/contato"
-              className="inline-flex shrink-0 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-stone-950 hover:bg-stone-200"
+              className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-md bg-white px-7 py-3 text-sm font-semibold text-stone-950 hover:bg-stone-100"
             >
               Entrar em contato
             </Link>

@@ -128,7 +128,7 @@ export function HomeSectionProductsPage() {
           Página inicial
         </p>
 
-        <h1 className="mt-2 break-words text-3xl font-semibold text-stone-950">
+        <h1 className="mt-3 break-words text-4xl font-semibold text-stone-950">
           {section.titulo}
         </h1>
 
